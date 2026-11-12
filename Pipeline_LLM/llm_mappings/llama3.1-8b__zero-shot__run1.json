@@ -1,0 +1,257 @@
+{
+ "model": "llama3.1:8b",
+ "condition": "zero-shot",
+ "run": 1,
+ "date": "2026-11-04 11:48:43",
+ "calls": [
+  {
+   "step": "mapping",
+   "data": {
+    "rules": [
+     {
+      "variable": "age",
+      "rule": "age >= 65",
+      "hp_id": "HP:0000118",
+      "hp_label": "Premature aging",
+      "match_type": "approximate",
+      "justification": "Age 65+ is associated with increased cardiovascular risk. While not a direct indicator of premature aging, it aligns with the HPO class."
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0000118",
+      "hp_label": "Premature aging",
+      "match_type": "approximate",
+      "justification": "Elevated blood pressure is a risk factor for cardiovascular disease, which is also a component of premature aging."
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0000116",
+      "hp_label": "Hypertension",
+      "match_type": "exact",
+      "justification": "Hypertension is directly indicated by elevated blood pressure."
+     },
+     {
+      "variable": "cholesterol",
+      "rule": "cholesterol >= 200",
+      "hp_id": "HP:0003018",
+      "hp_label": "Hypercholesterolemia",
+      "match_type": "exact",
+      "justification": "Elevated cholesterol levels are a direct indicator of hypercholesterolemia."
+     },
+     {
+      "variable": "max_heart_rate",
+      "rule": "max_heart_rate <= 100",
+      "hp_id": "HP:0001658",
+      "hp_label": "Bradycardia",
+      "match_type": "exact",
+      "justification": "Abnormally low heart rate is a direct indicator of bradycardia."
+     },
+     {
+      "variable": "st_depression",
+      "rule": "st_depression >= 1",
+      "hp_id": "HP:0001702",
+      "hp_label": "ST segment depression",
+      "match_type": "exact",
+      "justification": "ST segment depression is a direct indicator of abnormal myocardial perfusion."
+     },
+     {
+      "variable": "num_major_vessels",
+      "rule": "num_major_vessels >= 2",
+      "hp_id": "HP:0001700",
+      "hp_label": "Coronary artery disease",
+      "match_type": "exact",
+      "justification": "Multiple major coronary vessels colored during angiography indicate coronary artery disease."
+     },
+     {
+      "variable": "sex",
+      "rule": "sex == 'male'",
+      "hp_id": "HP:0000118",
+      "hp_label": "Premature aging",
+      "match_type": "approximate",
+      "justification": "Male sex is associated with increased cardiovascular risk, which aligns with premature aging."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type == 'typical angina'",
+      "hp_id": "HP:0001700",
+      "hp_label": "Coronary artery disease",
+      "match_type": "exact",
+      "justification": "Typical angina is a symptom of coronary artery disease."
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "rule": "fasting_blood_sugar == '>120 mg/dl'",
+      "hp_id": "HP:0003104",
+      "hp_label": "Diabetes mellitus",
+      "match_type": "exact",
+      "justification": "Hyperglycemia is a direct indicator of diabetes mellitus."
+     },
+     {
+      "variable": "resting_ecg",
+      "rule": "resting_ecg == 'left ventricular hypertrophy'",
+      "hp_id": "HP:0001700",
+      "hp_label": "Coronary artery disease",
+      "match_type": "exact",
+      "justification": "Left ventricular hypertrophy is a risk factor for coronary artery disease."
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "rule": "exercise_induced_angina == 'yes'",
+      "hp_id": "HP:0001700",
+      "hp_label": "Coronary artery disease",
+      "match_type": "exact",
+      "justification": "Angina induced by exercise is a symptom of coronary artery disease."
+     },
+     {
+      "variable": "st_slope",
+      "rule": "st_slope == 'downsloping'",
+      "hp_id": "HP:0001702",
+      "hp_label": "ST segment depression",
+      "match_type": "exact",
+      "justification": "Downsloping ST segment is indicative of abnormal myocardial perfusion."
+     },
+     {
+      "variable": "thalassemia",
+      "rule": "thalassemia == 'reversible defect'",
+      "hp_id": "HP:0001700",
+      "hp_label": "Coronary artery disease",
+      "match_type": "exact",
+      "justification": "Reversible defect on thallium-201 myocardial perfusion scintigraphy is a sign of coronary artery disease."
+     }
+    ]
+   },
+   "thinking": null,
+   "meta": {
+    "model": "llama3.1:8b",
+    "think": null,
+    "options": {
+     "temperature": 0.6,
+     "top_p": 0.9,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 826,
+    "output_tokens": 1076,
+    "seconds": 18.8
+   }
+  }
+ ],
+ "prompt": "We have a tabular dataset of patients referred for coronary angiography (Cleveland heart disease dataset).\nColumns:\n- `age` (numeric, observed range 29-77, median 56): Age of the patient (years).\n- `resting_blood_pressure` (numeric, observed range 94-200, median 130): Resting systolic blood pressure on admission to the hospital (mmHg).\n- `cholesterol` (numeric, observed range 126-564, median 242.5): Serum total cholesterol (mg/dl).\n- `max_heart_rate` (numeric, observed range 71-202, median 152.5): Maximum heart rate achieved during an exercise stress test (beats per minute).\n- `st_depression` (numeric, observed range 0-6.2, median 0.8): ST depression induced by exercise relative to rest (mm).\n- `num_major_vessels` (numeric, observed range 0-3, median 0): Number of major coronary vessels (0-3) colored by fluoroscopy during angiography.\n- `sex` (categorical, values: 'female', 'male'): Sex of the patient.\n- `chest_pain_type` (categorical, values: 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'): Type of chest pain reported by the patient.\n- `fasting_blood_sugar` (categorical, values: '<=120 mg/dl', '>120 mg/dl'): Fasting blood sugar, dichotomised at 120 mg/dl.\n- `resting_ecg` (categorical, values: 'ST-T abnormality', 'left ventricular hypertrophy', 'normal'): Resting electrocardiographic result.\n- `exercise_induced_angina` (categorical, values: 'no', 'yes'): Angina induced by the exercise stress test.\n- `st_slope` (categorical, values: 'downsloping', 'flat', 'upsloping'): Slope of the peak exercise ST segment.\n- `thalassemia` (categorical, values: 'fixed defect', 'normal', 'reversible defect'): Result of the thallium-201 myocardial perfusion scintigraphy stress test (the column name is historical; it is NOT the blood disorder thalassemia).\n\nTask: align the columns of this dataset with classes of the Human Phenotype Ontology (HPO).\nFor each column, write rules that map values (or value ranges) to the HPO class describing the\nabnormality those values indicate. Each HPO class will become an additional binary column\n(1 if the rule is true for the patient, 0 otherwise) used to train a machine-learning model.\n\nConstraints:\n- HPO describes abnormalities: normal values get no class. Columns that are not phenotypes may get no rule.\n- Choose thresholds from established clinical knowledge, not from this specific dataset.\n- Each `rule` must be a valid pandas `DataFrame.eval` boolean expression using only the column names\n  above and, for categorical columns, the exact values listed (e.g. `col == 'value'`, `col >= 140`,\n  `col in ['a', 'b']`). A rule may combine several columns.\n- Several rules may point to the same HPO class, and one column may yield several classes.\n- `hp_id` must be a real HPO identifier (format HP:0000000) and `hp_label` its exact label.\n- `match_type`: \"exact\" if the class describes the finding exactly, \"broader\" if you had to use a\n  more general class, \"approximate\" if it is a clinical interpretation.\n",
+ "rules": [
+  {
+   "variable": "age",
+   "rule": "age >= 65",
+   "hp_id": "HP:0000118",
+   "hp_label": "Premature aging",
+   "match_type": "approximate",
+   "justification": "Age 65+ is associated with increased cardiovascular risk. While not a direct indicator of premature aging, it aligns with the HPO class."
+  },
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0000118",
+   "hp_label": "Premature aging",
+   "match_type": "approximate",
+   "justification": "Elevated blood pressure is a risk factor for cardiovascular disease, which is also a component of premature aging."
+  },
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0000116",
+   "hp_label": "Hypertension",
+   "match_type": "exact",
+   "justification": "Hypertension is directly indicated by elevated blood pressure."
+  },
+  {
+   "variable": "cholesterol",
+   "rule": "cholesterol >= 200",
+   "hp_id": "HP:0003018",
+   "hp_label": "Hypercholesterolemia",
+   "match_type": "exact",
+   "justification": "Elevated cholesterol levels are a direct indicator of hypercholesterolemia."
+  },
+  {
+   "variable": "max_heart_rate",
+   "rule": "max_heart_rate <= 100",
+   "hp_id": "HP:0001658",
+   "hp_label": "Bradycardia",
+   "match_type": "exact",
+   "justification": "Abnormally low heart rate is a direct indicator of bradycardia."
+  },
+  {
+   "variable": "st_depression",
+   "rule": "st_depression >= 1",
+   "hp_id": "HP:0001702",
+   "hp_label": "ST segment depression",
+   "match_type": "exact",
+   "justification": "ST segment depression is a direct indicator of abnormal myocardial perfusion."
+  },
+  {
+   "variable": "num_major_vessels",
+   "rule": "num_major_vessels >= 2",
+   "hp_id": "HP:0001700",
+   "hp_label": "Coronary artery disease",
+   "match_type": "exact",
+   "justification": "Multiple major coronary vessels colored during angiography indicate coronary artery disease."
+  },
+  {
+   "variable": "sex",
+   "rule": "sex == 'male'",
+   "hp_id": "HP:0000118",
+   "hp_label": "Premature aging",
+   "match_type": "approximate",
+   "justification": "Male sex is associated with increased cardiovascular risk, which aligns with premature aging."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type == 'typical angina'",
+   "hp_id": "HP:0001700",
+   "hp_label": "Coronary artery disease",
+   "match_type": "exact",
+   "justification": "Typical angina is a symptom of coronary artery disease."
+  },
+  {
+   "variable": "fasting_blood_sugar",
+   "rule": "fasting_blood_sugar == '>120 mg/dl'",
+   "hp_id": "HP:0003104",
+   "hp_label": "Diabetes mellitus",
+   "match_type": "exact",
+   "justification": "Hyperglycemia is a direct indicator of diabetes mellitus."
+  },
+  {
+   "variable": "resting_ecg",
+   "rule": "resting_ecg == 'left ventricular hypertrophy'",
+   "hp_id": "HP:0001700",
+   "hp_label": "Coronary artery disease",
+   "match_type": "exact",
+   "justification": "Left ventricular hypertrophy is a risk factor for coronary artery disease."
+  },
+  {
+   "variable": "exercise_induced_angina",
+   "rule": "exercise_induced_angina == 'yes'",
+   "hp_id": "HP:0001700",
+   "hp_label": "Coronary artery disease",
+   "match_type": "exact",
+   "justification": "Angina induced by exercise is a symptom of coronary artery disease."
+  },
+  {
+   "variable": "st_slope",
+   "rule": "st_slope == 'downsloping'",
+   "hp_id": "HP:0001702",
+   "hp_label": "ST segment depression",
+   "match_type": "exact",
+   "justification": "Downsloping ST segment is indicative of abnormal myocardial perfusion."
+  },
+  {
+   "variable": "thalassemia",
+   "rule": "thalassemia == 'reversible defect'",
+   "hp_id": "HP:0001700",
+   "hp_label": "Coronary artery disease",
+   "match_type": "exact",
+   "justification": "Reversible defect on thallium-201 myocardial perfusion scintigraphy is a sign of coronary artery disease."
+  }
+ ]
+}

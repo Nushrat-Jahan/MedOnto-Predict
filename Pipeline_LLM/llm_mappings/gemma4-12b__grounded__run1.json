@@ -1,0 +1,501 @@
+{
+ "model": "gemma4:12b",
+ "condition": "grounded",
+ "run": 1,
+ "date": "2026-11-04 11:47:43",
+ "calls": [
+  {
+   "step": "queries",
+   "data": {
+    "queries": [
+     {
+      "variable": "age",
+      "search_terms": [
+       "advanced age",
+       "senescence",
+       "old age"
+      ]
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "search_terms": [
+       "hypertension",
+       "high blood pressure",
+       "elevated blood pressure"
+      ]
+     },
+     {
+      "variable": "cholesterol",
+      "search_terms": [
+       "hypercholesterolemia",
+       "high cholesterol",
+       "elevated serum cholesterol"
+      ]
+     },
+     {
+      "variable": "max_heart_rate",
+      "search_terms": [
+       "tachycardia",
+       "bradycardia",
+       "abnormal heart rate"
+      ]
+     },
+     {
+      "variable": "st_depression",
+      "search_terms": [
+       "ST segment depression",
+       "ECG ST segment depression"
+      ]
+     },
+     {
+      "variable": "num_major_vessels",
+      "search_terms": [
+       "coronary artery disease",
+       "coronary artery occlusion",
+       "coronary artery stenosis"
+      ]
+     },
+     {
+      "variable": "sex",
+      "search_terms": [
+       "male",
+       "female"
+      ]
+     },
+     {
+      "variable": "chest_pain_type",
+      "search_terms": [
+       "angina pectoris",
+       "chest pain",
+       "atypical angina",
+       "typical angina"
+      ]
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "search_terms": [
+       "hyperglycemia",
+       "diabetes mellitus",
+       "elevated blood glucose"
+      ]
+     },
+     {
+      "variable": "resting_ecg",
+      "search_terms": [
+       "left ventricular hypertrophy",
+       "ST-T wave abnormality",
+       "abnormal electrocardiogram"
+      ]
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "search_terms": [
+       "angina pectoris",
+       "exertional angina",
+       "exercise-induced angina"
+      ]
+     },
+     {
+      "variable": "st_slope",
+      "search_terms": [
+       "ST segment",
+       "downsloping ST segment",
+       "upsloping ST segment",
+       "flat ST segment"
+      ]
+     },
+     {
+      "variable": "thalassemia",
+      "search_terms": [
+       "myocardial perfusion defect",
+       "myocardial ischemia",
+       "thallium-201 perfusion defect"
+      ]
+     }
+    ]
+   },
+   "thinking": "\nExpert in clinical informatics and biomedical ontologies (specifically HPO).\nA tabular dataset of patients for coronary angiography (Cleveland Heart Disease).\nMap each of the 13 columns to HPO search terms.\nThe goal is to find HPO classes that describe *abnormal values* of these specific measurements/categories.\n\n    *   *Age:* Generally not an HPO class (unless looking for specific age-related syndromes), but since the prompt asks for \"abnormal values,\" I should consider if \"advanced age\" or specific age-related phenotypes are relevant. However, usually, age is a demographic, not a phenotype. I'll provide terms related to age-related heart issues or just age-related terms.\n    *   *Resting Blood Pressure:* Look for \"hypertension\" or \"high blood pressure.\"\n    *   *Cholesterol:* Look for \"hypercholesterolemia.\"\n    *   *Max Heart Rate:* Usually not an HPO phenotype unless \"bradycardia\" or \"tachycardia\" is implied.\n    *   *ST Depression:* This is an ECG finding. Look for \"ST segment depression.\"\n    *   *Num Major Vessels:* This refers to coronary artery disease/occlusion. Look for \"coronary artery disease,\" \"coronary artery occlusion.\"\n    *   *Sex:* Not a phenotype. Ignore or provide \"male/female\" but note that HPO doesn't typically classify \"being male\" as a phenotype in this context.\n    *   *Chest Pain Type:* Look for \"angina,\" \"chest pain.\"\n    *   *Fasting Blood Sugar:* Look for \"hyperglycemia,\" \"diabetes.\"\n    *   *Resting ECG:* Look for \"left ventricular hypertrophy,\" \"ST-T wave abnormality.\"\n    *   *Exercise Induced Angina:* Look for \"angina,\" \"exertional angina.\"\n    *   *ST Slope:* This is very specific to ECG. Look for \"ST segment,\" \"ST elevation,\" \"ST depression.\"\n    *   *Thalassemia (Thallium-201):* The prompt clarifies this is a perfusion test, not the blood disorder. Look for \"myocardial perfusion defect,\" \"ischemia.\"\n\n    *   *Refining \"Age\":* In HPO, \"age\" isn't a phenotype. I will provide terms for \"advanced age\" or \"old age\" as it's a risk factor, but clarify it's a demographic.\n    *   *Refining \"Resting Blood Pressure\":* \"Hypertension\" is the primary HPO term. \"Elevated blood pressure\" is also good.\n    *   *Refining \"Cholesterol\":* \"Hypercholesterolemia\" is the standard. \"High cholesterol\" is a synonym.\n    *   *Refining \"Max Heart Rate\":* If high, \"tachycardia.\" If low, \"bradycardia.\"\n    *   *Refining \"ST Depression\":* \"ST segment depression\" is a direct clinical finding.\n    *   *Refining \"Num Major Vessels\":* Since the dataset tracks the *number* of vessels, the underlying phenotype is \"coronary artery disease\" or \"coronary artery occlusion.\"\n    *   *Refining \"Sex\":* Standard HPO doesn't have \"male\" or \"female\" as a phenotype of heart disease, so I'll mention it's a demographic variable.\n    *   *Refining \"Chest Pain Type\":* \"Angina pectoris\" is the standard. \"Chest pain\" is more general.\n    *   *Refining \"Fasting Blood Sugar\":* \"Hyperglycemia\" and \"Diabetes mellitus\" are the key HPO terms.\n    *   *Refining \"Resting ECG\":* \"Left ventricular hypertrophy\" (direct HPO term), \"ST-T wave abnormality.\"\n    *   *Refining \"Exercise Induced Angina\":* \"Angina pectoris,\" \"Exertional angina.\"\n    *   *Refining \"ST Slope\":* \"ST segment,\" \"ST segment elevation,\" \"ST segment depression.\"\n    *   *Refining \"Thalassemia\" (Perfusion):* The user noted it's NOT the blood disorder. The phenotype is \"myocardial perfusion defect\" or \"myocardial ischemia.\"\n\n    *   Organize by column name.\n    *   Provide the 1-5 terms.\n    *   Add a brief note for clarity where necessary (especially for the \"Thalassemia\" and \"Sex\" columns).",
+   "meta": {
+    "model": "gemma4:12b",
+    "think": null,
+    "options": {
+     "temperature": 1.0,
+     "top_p": 0.95,
+     "top_k": 64,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 608,
+    "output_tokens": 1505,
+    "seconds": 16.6
+   }
+  },
+  {
+   "step": "mapping",
+   "data": {
+    "rules": [
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0000822",
+      "hp_label": "Hypertension",
+      "match_type": "approximate",
+      "justification": "Standard clinical threshold for diagnosing hypertension is a systolic blood pressure of 140 mmHg or higher."
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0004421",
+      "hp_label": "Elevated systolic blood pressure",
+      "match_type": "exact",
+      "justification": "The provided value represents systolic pressure; a value of 140 mmHg or higher is the clinical definition of elevated systolic blood pressure."
+     },
+     {
+      "variable": "cholesterol",
+      "rule": "cholesterol >= 200",
+      "hp_id": "HP:0003124",
+      "hp_label": "Hypercholesterolemia",
+      "match_type": "approximate",
+      "justification": "Total cholesterol levels of 200 mg/dl or higher are generally considered indicative of hypercholesterolemia."
+     },
+     {
+      "variable": "max_heart_rate",
+      "rule": "max_heart_rate > 100",
+      "hp_id": "HP:0001649",
+      "hp_label": "Tachycardia",
+      "match_type": "approximate",
+      "justification": "Tachycardia is clinically defined as a heart rate exceeding 100 beats per minute."
+     },
+     {
+      "variable": "max_heart_rate",
+      "rule": "max_heart_rate < 60",
+      "hp_id": "HP:0001662",
+      "hp_label": "Bradycardia",
+      "match_type": "approximate",
+      "justification": "Bradycardia is clinically defined as a heart rate below 60 beats per minute."
+     },
+     {
+      "variable": "st_depression",
+      "rule": "st_depression >= 1",
+      "hp_id": "HP:0012250",
+      "hp_label": "ST segment depression",
+      "match_type": "exact",
+      "justification": "ST segment depression is clinically significant when it reaches 1 mm or greater."
+     },
+     {
+      "variable": "num_major_vessels",
+      "rule": "num_major_vessels > 0",
+      "hp_id": "HP:0005145",
+      "hp_label": "Coronary artery stenosis",
+      "match_type": "approximate",
+      "justification": "The presence of any major vessels colored by fluoroscopy indicates coronary artery stenosis/disease."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type in ['atypical angina', 'typical angina']",
+      "hp_id": "HP:0001681",
+      "hp_label": "Angina pectoris",
+      "match_type": "exact",
+      "justification": "The categorical values 'typical' and 'atypical' angina directly map to the phenotype Angina pectoris."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type in ['atypical angina', 'typical angina', 'non-anginal pain']",
+      "hp_id": "HP:0100749",
+      "hp_label": "Chest pain",
+      "match_type": "broader",
+      "justification": "All types of pain listed in the chest_pain_type column represent a clinical presentation of chest pain."
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "rule": "fasting_blood_sugar == '>120 mg/dl'",
+      "hp_id": "HP:0003074",
+      "hp_label": "Hyperglycemia",
+      "match_type": "approximate",
+      "justification": "A fasting blood sugar over 120 mg/dl is a clinical marker for hyperglycemia."
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "rule": "fasting_blood_sugar == '>120 mg/dl'",
+      "hp_id": "HP:0000819",
+      "hp_label": "Diabetes mellitus",
+      "match_type": "approximate",
+      "justification": "In clinical practice, fasting blood sugar levels over 120 mg/dl are frequently used as a screening threshold for diabetes mellitus."
+     },
+     {
+      "variable": "resting_ecg",
+      "rule": "resting_ecg == 'left ventricular hypertrophy'",
+      "hp_id": "HP:0001712",
+      "hp_label": "Left ventricular hypertrophy",
+      "match_type": "exact",
+      "justification": "Direct mapping of the 'left ventricular hypertrophy' categorical value."
+     },
+     {
+      "variable": "resting_ecg",
+      "rule": "resting_ecg == 'ST-T abnormality'",
+      "hp_id": "HP:0003115",
+      "hp_label": "Abnormal EKG",
+      "match_type": "broader",
+      "justification": "An ST-T abnormality is a specific form of an abnormal EKG (electrocardiogram)."
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "rule": "exercise_induced_angina == 'yes'",
+      "hp_id": "HP:0001681",
+      "hp_label": "Angina pectoris",
+      "match_type": "exact",
+      "justification": "Presence of exercise-induced angina is a direct clinical finding for Angina pectoris."
+     },
+     {
+      "variable": "st_slope",
+      "rule": "st_slope == 'downsloping'",
+      "hp_id": "HP:0012250",
+      "hp_label": "ST segment depression",
+      "match_type": "approximate",
+      "justification": "A downsloping ST segment is a clinical finding associated with ST segment depression."
+     },
+     {
+      "variable": "st_slope",
+      "rule": "st_slope == 'downsloping'",
+      "hp_id": "HP:0012249",
+      "hp_label": "Abnormal ST segment",
+      "match_type": "broader",
+      "justification": "A downsloping ST segment is a type of abnormal ST segment morphology."
+     },
+     {
+      "variable": "st_slope",
+      "rule": "st_slope == 'flat'",
+      "hp_id": "HP:0012249",
+      "hp_label": "Abnormal ST segment",
+      "match_type": "approximate",
+      "justification": "A flat ST segment during exercise is a clinical finding indicative of an abnormal ST segment."
+     }
+    ]
+   },
+   "thinking": "The objective is to map columns of a coronary angiography dataset (Cleveland heart disease) to specific HPO classes based on provided candidates. The output should be a set of rules (pandas `eval` compatible) that result in binary columns (1 if the rule is true, 0 otherwise).\n\n    *   `age`: 29-77 (median 56). HPO candidates: Accelerated skeletal maturation, Advanced ossification, Old-aged sensorineural hearing impairment.\n        *   *Analysis:* These are clinical signs of aging or specific skeletal issues. \"Old-aged sensorineural hearing impairment\" is for elderly patients. However, the dataset is for heart disease, and general age (29-77) doesn't automatically trigger \"Accelerated skeletal maturation\" (usually childhood/puberty) or \"Advanced ossification\" (usually childhood). \"Old-aged sensorineural hearing impairment\" is very specific.\n        *   *Conclusion:* No rule fits general age range in this context.\n\n    *   `resting_blood_pressure`: 94-200 (median 130). HPO candidates: Hypertension, Portal hypertension, Ocular hypertension, Labile Hypertension, Episodic hypertension, Maternal hypertension, Renovascular hypertension, Pulmonary venous hypertension, Blood pressure higher in legs/arms, Elevated systolic/diastolic.\n        *   *Clinical Knowledge:* Hypertension is generally diagnosed at $\\ge$ 140/90 mmHg.\n        *   *Rule:* `resting_blood_pressure >= 140` -> HP:0000822 (Hypertension).\n        *   *Rule:* `resting_blood_pressure >= 140` -> HP:0004421 (Elevated systolic blood pressure).\n        *   *Rule:* Note: Diastolic is not explicitly provided, but systolic $\\ge$ 140 is a standard cutoff for hypertension.\n\n    *   `cholesterol`: 126-564 (median 242.5). HPO candidates: Hypercholesterolemia, Elevated HDL-C, Abnormal HDL-C, Decreased HDL-C.\n        *   *Clinical Knowledge:* Hypercholesterolemia is typically total cholesterol $\\ge$ 200 mg/dl (or $\\ge$ 240 mg/dl for high risk).\n        *   *Rule:* `cholesterol >= 200` -> HP:0003124 (Hypercholesterolemia).\n\n    *   `max_heart_rate`: 71-202 (median 152.5). HPO candidates: Tachycardia, Sinus tachycardia, Fetal tachycardia, AV nodal tachycardia, Paroxysmal tachycardia, Ventricular tachycardia, Orthostatic tachycardia, Atrial reentry tachycardia, Bradycardia, Sinus bradycardia, etc.\n        *   *Clinical Knowledge:* Tachycardia is generally HR > 100 bpm. Bradycardia is HR < 60 bpm.\n        *   *Rule:* `max_heart_rate > 100` -> HP:0001649 (Tachycardia).\n        *   *Rule:* `max_heart_rate < 60` -> HP:0001662 (Bradycardia).\n\n    *   `st_depression`: 0-6.2 (median 0.8). HPO candidates: ST segment depression.\n        *   *Clinical Knowledge:* ST depression is typically $\\ge$ 1 mm (relative to baseline/rest).\n        *   *Rule:* `st_depression >= 1` -> HP:0012250 (ST segment depression).\n\n    *   `num_major_vessels`: 0-3. HPO candidates: Premature coronary artery atherosclerosis, Nonocclusive coronary artery atherosclerosis, Coronary artery stenosis, Post-angioplasty coronary artery restenosis.\n        *   *Context:* In this dataset, `num_major_vessels` refers to the number of major vessels *colored* (involved/diseased) by fluoroscopy. If it's > 0, there's evidence of coronary artery disease.\n        *   *Rule:* `num_major_vessels > 0` -> HP:0005145 (Coronary artery stenosis). (Stenosis is the most general and appropriate term for a vessel \"colored\" during angiography).\n\n    *   `sex`: female, male. HPO candidates: Gynecomastia, Male anorgasmia, Male infertility, Male hypogonadism, Female anorgasmia, Female infertility, Female hypogonadism, Pelvic organ prolapse, Ovarian gonadoblastoma, Decreased female libido, Increased female libido, Abnormal female meiosis.\n        *   *Analysis:* These are specific pathology findings, not binary sex markers.\n        *   *Conclusion:* No rule.\n\n    *   `chest_pain_type`: asymptomatic, atypical angina, non-anginal pain, typical angina. HPO candidates: Angina pectoris, Chest pain, Pleuritic chest pain, Pressure, Palpation, Ripping/Tearing.\n        *   *Rule:* `chest_pain_type == 'typical angina'` -> HP:0001681 (Angina pectoris).\n        *   *Rule:* `chest_pain_type == 'atypical angina'` -> HP:0001681 (Angina pectoris).\n        *   *Rule:* `chest_pain_type in ['atypical angina', 'typical angina', 'non-anginal pain']` -> HP:0100749 (Chest pain).\n\n    *   `fasting_blood_sugar`: <=120 mg/dl, >120 mg/dl. HPO candidates: Hyperglycemia, Postprandial hyperglycemia, Diabetes mellitus, Type I, Type II, Insulin-resistant, etc.\n        *   *Clinical Knowledge:* Fasting glucose > 126 mg/dl is often a threshold for diabetes, but the dataset uses 120. Hyperglycemia is generally > 126 mg/dl (fasting).\n        *   *Rule:* `fasting_blood_sugar == '>120 mg/dl'` -> HP:0003074 (Hyperglycemia).\n        *   *Rule:* `fasting_blood_sugar == '>120 mg/dl'` -> HP:0000819 (Diabetes mellitus).\n\n    *   `resting_ecg`: ST-T abnormality, left ventricular hypertrophy, normal. HPO candidates: Left ventricular hypertrophy, Abnormal EKG.\n        *   *Rule:* `resting_ecg == 'left ventricular hypertrophy'` -> HP:0001712 (Left ventricular hypertrophy).\n        *   *Rule:* `resting_ecg == 'ST-T abnormality'` -> HP:0003115 (Abnormal EKG).\n\n    *   `exercise_induced_angina`: no, yes. HPO candidates: Angina pectoris.\n        *   *Rule:* `exercise_induced_angina == 'yes'` -> HP:0001681 (Angina pectoris).\n\n    *   `st_slope`: downsloping, flat, upsloping. HPO candidates: Abnormal ST segment, ST segment elevation, ST segment depression, Coved type, etc.\n        *   *Clinical Knowledge:* Downsloping or flat ST segments during exercise often indicate ischemia.\n        *   *Rule:* `st_slope == 'downsloping'` -> HP:0012250 (ST segment depression).\n        *   *Rule:* `st_slope == 'downsloping'` -> HP:0012249 (Abnormal ST segment).\n        *   *Rule:* `st_slope == 'flat'` -> HP:0012249 (Abnormal ST segment).\n\n    *   `thalassemia`: fixed defect, normal, reversible defect. (Note: Not the blood disorder).\n        *   *Candidate list:* No candidates found.\n        *   *Conclusion:* No rule.\n\n    *   *Rule formatting:* Must be `df.eval` style.\n    *   *Thresholds:* Use standard ones. Systolic $\\ge$ 140 for Hypertension. Cholesterol $\\ge$ 200 for Hypercholesterolemia. Heart rate > 100 for Tachycardia.\n    *   *Logical consistency:* `num_major_vessels > 0` for stenosis. `st_depression >= 1` for ST segment depression.\n\n    *Check `resting_blood_pressure`:* The dataset provides one numeric value for \"resting_blood_pressure\". In medical terms, if only one value is provided without a slash, it's usually systolic.\n    *Check `st_slope`:* \"downsloping\" is strongly associated with depression in clinical contexts.\n\n    *Reviewing Candidate List for `st_slope`:*\n    - HP:0012249 | Abnormal ST segment\n    - HP:0012250 | ST segment depression\n    - HP:0012251 | ST segment elevation\n    Rule: `st_slope == 'downsloping'` -> HP:0012250 (ST segment depression) and HP:0012249 (Abnormal ST segment).\n\n    *Reviewing Candidate List for `num_major_vessels`:*\n    - HP:0005145 | Coronary artery stenosis\n    Rule: `num_major_vessels > 0` -> HP:0005145.\n\n    *Reviewing Candidate List for `cholesterol`:*\n    - HP:0003124 | Hypercholesterolemia\n    Rule: `cholesterol >= 200` -> HP:0003124.\n\n    *Refining `fasting_blood_sugar`:*\n    The dataset categorical values are `<=120 mg/dl` and `>120 mg/dl`.\n    - HP:0003074 | Hyperglycemia\n    - HP:0000819 | Diabetes mellitus\n    Rule: `fasting_blood_sugar == '>120 mg/dl'` -> both.",
+   "meta": {
+    "model": "gemma4:12b",
+    "think": null,
+    "options": {
+     "temperature": 1.0,
+     "top_p": 0.95,
+     "top_k": 64,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 3038,
+    "output_tokens": 4010,
+    "seconds": 42.9
+   }
+  }
+ ],
+ "queries": {
+  "age": [
+   "advanced age",
+   "senescence",
+   "old age"
+  ],
+  "resting_blood_pressure": [
+   "hypertension",
+   "high blood pressure",
+   "elevated blood pressure"
+  ],
+  "cholesterol": [
+   "hypercholesterolemia",
+   "high cholesterol",
+   "elevated serum cholesterol"
+  ],
+  "max_heart_rate": [
+   "tachycardia",
+   "bradycardia",
+   "abnormal heart rate"
+  ],
+  "st_depression": [
+   "ST segment depression",
+   "ECG ST segment depression"
+  ],
+  "num_major_vessels": [
+   "coronary artery disease",
+   "coronary artery occlusion",
+   "coronary artery stenosis"
+  ],
+  "sex": [
+   "male",
+   "female"
+  ],
+  "chest_pain_type": [
+   "angina pectoris",
+   "chest pain",
+   "atypical angina",
+   "typical angina"
+  ],
+  "fasting_blood_sugar": [
+   "hyperglycemia",
+   "diabetes mellitus",
+   "elevated blood glucose"
+  ],
+  "resting_ecg": [
+   "left ventricular hypertrophy",
+   "ST-T wave abnormality",
+   "abnormal electrocardiogram"
+  ],
+  "exercise_induced_angina": [
+   "angina pectoris",
+   "exertional angina",
+   "exercise-induced angina"
+  ],
+  "st_slope": [
+   "ST segment",
+   "downsloping ST segment",
+   "upsloping ST segment",
+   "flat ST segment"
+  ],
+  "thalassemia": [
+   "myocardial perfusion defect",
+   "myocardial ischemia",
+   "thallium-201 perfusion defect"
+  ]
+ },
+ "candidates": "`age`:\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n  - HP:0040113 | Old-aged sensorineural hearing impairment | parents: Sensorineural hearing impairment\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0012184 | Elevated circulating HDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0031888 | Abnormal circulating HDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0003233 | Decreased circulating HDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating HDL-C concentration\n`max_heart_rate`:\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n  - HP:0001662 | Bradycardia | parents: Arrhythmia\n  - HP:0001688 | Sinus bradycardia | parents: Bradycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:0032773 | Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal autonomic seizure\n  - HP:0032784 | Focal aware autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal aware autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0032788 | Focal impaired awareness autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal impaired awareness autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0031860 | Abnormal heart rate variability | parents: Arrhythmia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n`sex`:\n  - HP:0000771 | Gynecomastia | parents: Abnormal breast morphology\n  - HP:0040308 | Male anorgasmia | parents: Male sexual dysfunction, Anorgasmia\n  - HP:0003251 | Male infertility | parents: Infertility, Decreased fertility in males\n  - HP:0000026 | Male hypogonadism | parents: Functional abnormality of male internal genitalia, Hypogonadism\n  - HP:0030015 | Female anorgasmia | parents: Female sexual dysfunction, Anorgasmia\n  - HP:0008222 | Female infertility | parents: Infertility, Decreased fertility in females\n  - HP:0000134 | Female hypogonadism | parents: Hypogonadism, Abnormal ovarian physiology\n  - HP:0031607 | Pelvic organ prolapse | parents: Abnormal vagina morphology\n  - HP:0000149 | Ovarian gonadoblastoma | parents: Gonadoblastoma, Ovarian neoplasm\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0033338 | Abnormal female meiosis | parents: Abnormal meiosis\n`chest_pain_type`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0008255 | Transient neonatal diabetes mellitus | parents: Neonatal insulin-dependent diabetes mellitus\n  - HP:0000857 | Neonatal insulin-dependent diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000877 | Insulin-resistant diabetes mellitus at puberty | parents: Insulin-resistant diabetes mellitus\n  - HP:0410178 | Elevated circulating glucose-6-phosphate dehydrogenase activity | parents: Abnormal circulating glucose-6-phosphate dehydrogenase concentration\n`resting_ecg`:\n  - HP:0001712 | Left ventricular hypertrophy | parents: Abnormal left ventricle morphology, Ventricular hypertrophy\n  - HP:0003115 | Abnormal EKG | parents: Abnormality of cardiovascular system electrophysiology\n`exercise_induced_angina`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`st_slope`:\n  - HP:0012249 | Abnormal ST segment | parents: Abnormal EKG\n  - HP:0012251 | ST segment elevation | parents: Abnormal ST segment\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n  - HP:6000984 | Coved type ST segment elevation | parents: ST segment elevation\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:6000985 | Saddle-back type ST segment elevation | parents: ST segment elevation\n  - HP:6001209 | Volar intercalated segment instability | parents: Abnormal carpal morphology\n  - HP:0006631 | Hypoplastic distal segments of scapulae | parents: Hypoplastic scapulae\n`thalassemia`:\n  (no candidate found)",
+ "prompt": "We have a tabular dataset of patients referred for coronary angiography (Cleveland heart disease dataset).\nColumns:\n- `age` (numeric, observed range 29-77, median 56): Age of the patient (years).\n- `resting_blood_pressure` (numeric, observed range 94-200, median 130): Resting systolic blood pressure on admission to the hospital (mmHg).\n- `cholesterol` (numeric, observed range 126-564, median 242.5): Serum total cholesterol (mg/dl).\n- `max_heart_rate` (numeric, observed range 71-202, median 152.5): Maximum heart rate achieved during an exercise stress test (beats per minute).\n- `st_depression` (numeric, observed range 0-6.2, median 0.8): ST depression induced by exercise relative to rest (mm).\n- `num_major_vessels` (numeric, observed range 0-3, median 0): Number of major coronary vessels (0-3) colored by fluoroscopy during angiography.\n- `sex` (categorical, values: 'female', 'male'): Sex of the patient.\n- `chest_pain_type` (categorical, values: 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'): Type of chest pain reported by the patient.\n- `fasting_blood_sugar` (categorical, values: '<=120 mg/dl', '>120 mg/dl'): Fasting blood sugar, dichotomised at 120 mg/dl.\n- `resting_ecg` (categorical, values: 'ST-T abnormality', 'left ventricular hypertrophy', 'normal'): Resting electrocardiographic result.\n- `exercise_induced_angina` (categorical, values: 'no', 'yes'): Angina induced by the exercise stress test.\n- `st_slope` (categorical, values: 'downsloping', 'flat', 'upsloping'): Slope of the peak exercise ST segment.\n- `thalassemia` (categorical, values: 'fixed defect', 'normal', 'reversible defect'): Result of the thallium-201 myocardial perfusion scintigraphy stress test (the column name is historical; it is NOT the blood disorder thalassemia).\n\nTask: align the columns of this dataset with classes of the Human Phenotype Ontology (HPO).\nFor each column, write rules that map values (or value ranges) to the HPO class describing the\nabnormality those values indicate. Each HPO class will become an additional binary column\n(1 if the rule is true for the patient, 0 otherwise) used to train a machine-learning model.\n\nConstraints:\n- HPO describes abnormalities: normal values get no class. Columns that are not phenotypes may get no rule.\n- Choose thresholds from established clinical knowledge, not from this specific dataset.\n- Each `rule` must be a valid pandas `DataFrame.eval` boolean expression using only the column names\n  above and, for categorical columns, the exact values listed (e.g. `col == 'value'`, `col >= 140`,\n  `col in ['a', 'b']`). A rule may combine several columns.\n- Several rules may point to the same HPO class, and one column may yield several classes.\n- `hp_id` must be a real HPO identifier (format HP:0000000) and `hp_label` its exact label.\n- `match_type`: \"exact\" if the class describes the finding exactly, \"broader\" if you had to use a\n  more general class, \"approximate\" if it is a clinical interpretation.\n\nUse ONLY HPO classes from the following candidate list (retrieved from the HPO release we use).\nIf no candidate fits a column, give that column no rule.\n`age`:\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n  - HP:0040113 | Old-aged sensorineural hearing impairment | parents: Sensorineural hearing impairment\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0012184 | Elevated circulating HDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0031888 | Abnormal circulating HDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0003233 | Decreased circulating HDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating HDL-C concentration\n`max_heart_rate`:\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n  - HP:0001662 | Bradycardia | parents: Arrhythmia\n  - HP:0001688 | Sinus bradycardia | parents: Bradycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:0032773 | Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal autonomic seizure\n  - HP:0032784 | Focal aware autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal aware autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0032788 | Focal impaired awareness autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal impaired awareness autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0031860 | Abnormal heart rate variability | parents: Arrhythmia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n`sex`:\n  - HP:0000771 | Gynecomastia | parents: Abnormal breast morphology\n  - HP:0040308 | Male anorgasmia | parents: Male sexual dysfunction, Anorgasmia\n  - HP:0003251 | Male infertility | parents: Infertility, Decreased fertility in males\n  - HP:0000026 | Male hypogonadism | parents: Functional abnormality of male internal genitalia, Hypogonadism\n  - HP:0030015 | Female anorgasmia | parents: Female sexual dysfunction, Anorgasmia\n  - HP:0008222 | Female infertility | parents: Infertility, Decreased fertility in females\n  - HP:0000134 | Female hypogonadism | parents: Hypogonadism, Abnormal ovarian physiology\n  - HP:0031607 | Pelvic organ prolapse | parents: Abnormal vagina morphology\n  - HP:0000149 | Ovarian gonadoblastoma | parents: Gonadoblastoma, Ovarian neoplasm\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0033338 | Abnormal female meiosis | parents: Abnormal meiosis\n`chest_pain_type`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0008255 | Transient neonatal diabetes mellitus | parents: Neonatal insulin-dependent diabetes mellitus\n  - HP:0000857 | Neonatal insulin-dependent diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000877 | Insulin-resistant diabetes mellitus at puberty | parents: Insulin-resistant diabetes mellitus\n  - HP:0410178 | Elevated circulating glucose-6-phosphate dehydrogenase activity | parents: Abnormal circulating glucose-6-phosphate dehydrogenase concentration\n`resting_ecg`:\n  - HP:0001712 | Left ventricular hypertrophy | parents: Abnormal left ventricle morphology, Ventricular hypertrophy\n  - HP:0003115 | Abnormal EKG | parents: Abnormality of cardiovascular system electrophysiology\n`exercise_induced_angina`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`st_slope`:\n  - HP:0012249 | Abnormal ST segment | parents: Abnormal EKG\n  - HP:0012251 | ST segment elevation | parents: Abnormal ST segment\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n  - HP:6000984 | Coved type ST segment elevation | parents: ST segment elevation\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:6000985 | Saddle-back type ST segment elevation | parents: ST segment elevation\n  - HP:6001209 | Volar intercalated segment instability | parents: Abnormal carpal morphology\n  - HP:0006631 | Hypoplastic distal segments of scapulae | parents: Hypoplastic scapulae\n`thalassemia`:\n  (no candidate found)\n",
+ "rules": [
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0000822",
+   "hp_label": "Hypertension",
+   "match_type": "approximate",
+   "justification": "Standard clinical threshold for diagnosing hypertension is a systolic blood pressure of 140 mmHg or higher."
+  },
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0004421",
+   "hp_label": "Elevated systolic blood pressure",
+   "match_type": "exact",
+   "justification": "The provided value represents systolic pressure; a value of 140 mmHg or higher is the clinical definition of elevated systolic blood pressure."
+  },
+  {
+   "variable": "cholesterol",
+   "rule": "cholesterol >= 200",
+   "hp_id": "HP:0003124",
+   "hp_label": "Hypercholesterolemia",
+   "match_type": "approximate",
+   "justification": "Total cholesterol levels of 200 mg/dl or higher are generally considered indicative of hypercholesterolemia."
+  },
+  {
+   "variable": "max_heart_rate",
+   "rule": "max_heart_rate > 100",
+   "hp_id": "HP:0001649",
+   "hp_label": "Tachycardia",
+   "match_type": "approximate",
+   "justification": "Tachycardia is clinically defined as a heart rate exceeding 100 beats per minute."
+  },
+  {
+   "variable": "max_heart_rate",
+   "rule": "max_heart_rate < 60",
+   "hp_id": "HP:0001662",
+   "hp_label": "Bradycardia",
+   "match_type": "approximate",
+   "justification": "Bradycardia is clinically defined as a heart rate below 60 beats per minute."
+  },
+  {
+   "variable": "st_depression",
+   "rule": "st_depression >= 1",
+   "hp_id": "HP:0012250",
+   "hp_label": "ST segment depression",
+   "match_type": "exact",
+   "justification": "ST segment depression is clinically significant when it reaches 1 mm or greater."
+  },
+  {
+   "variable": "num_major_vessels",
+   "rule": "num_major_vessels > 0",
+   "hp_id": "HP:0005145",
+   "hp_label": "Coronary artery stenosis",
+   "match_type": "approximate",
+   "justification": "The presence of any major vessels colored by fluoroscopy indicates coronary artery stenosis/disease."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type in ['atypical angina', 'typical angina']",
+   "hp_id": "HP:0001681",
+   "hp_label": "Angina pectoris",
+   "match_type": "exact",
+   "justification": "The categorical values 'typical' and 'atypical' angina directly map to the phenotype Angina pectoris."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type in ['atypical angina', 'typical angina', 'non-anginal pain']",
+   "hp_id": "HP:0100749",
+   "hp_label": "Chest pain",
+   "match_type": "broader",
+   "justification": "All types of pain listed in the chest_pain_type column represent a clinical presentation of chest pain."
+  },
+  {
+   "variable": "fasting_blood_sugar",
+   "rule": "fasting_blood_sugar == '>120 mg/dl'",
+   "hp_id": "HP:0003074",
+   "hp_label": "Hyperglycemia",
+   "match_type": "approximate",
+   "justification": "A fasting blood sugar over 120 mg/dl is a clinical marker for hyperglycemia."
+  },
+  {
+   "variable": "fasting_blood_sugar",
+   "rule": "fasting_blood_sugar == '>120 mg/dl'",
+   "hp_id": "HP:0000819",
+   "hp_label": "Diabetes mellitus",
+   "match_type": "approximate",
+   "justification": "In clinical practice, fasting blood sugar levels over 120 mg/dl are frequently used as a screening threshold for diabetes mellitus."
+  },
+  {
+   "variable": "resting_ecg",
+   "rule": "resting_ecg == 'left ventricular hypertrophy'",
+   "hp_id": "HP:0001712",
+   "hp_label": "Left ventricular hypertrophy",
+   "match_type": "exact",
+   "justification": "Direct mapping of the 'left ventricular hypertrophy' categorical value."
+  },
+  {
+   "variable": "resting_ecg",
+   "rule": "resting_ecg == 'ST-T abnormality'",
+   "hp_id": "HP:0003115",
+   "hp_label": "Abnormal EKG",
+   "match_type": "broader",
+   "justification": "An ST-T abnormality is a specific form of an abnormal EKG (electrocardiogram)."
+  },
+  {
+   "variable": "exercise_induced_angina",
+   "rule": "exercise_induced_angina == 'yes'",
+   "hp_id": "HP:0001681",
+   "hp_label": "Angina pectoris",
+   "match_type": "exact",
+   "justification": "Presence of exercise-induced angina is a direct clinical finding for Angina pectoris."
+  },
+  {
+   "variable": "st_slope",
+   "rule": "st_slope == 'downsloping'",
+   "hp_id": "HP:0012250",
+   "hp_label": "ST segment depression",
+   "match_type": "approximate",
+   "justification": "A downsloping ST segment is a clinical finding associated with ST segment depression."
+  },
+  {
+   "variable": "st_slope",
+   "rule": "st_slope == 'downsloping'",
+   "hp_id": "HP:0012249",
+   "hp_label": "Abnormal ST segment",
+   "match_type": "broader",
+   "justification": "A downsloping ST segment is a type of abnormal ST segment morphology."
+  },
+  {
+   "variable": "st_slope",
+   "rule": "st_slope == 'flat'",
+   "hp_id": "HP:0012249",
+   "hp_label": "Abnormal ST segment",
+   "match_type": "approximate",
+   "justification": "A flat ST segment during exercise is a clinical finding indicative of an abnormal ST segment."
+  }
+ ]
+}

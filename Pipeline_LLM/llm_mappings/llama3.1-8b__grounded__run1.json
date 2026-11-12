@@ -1,0 +1,439 @@
+{
+ "model": "llama3.1:8b",
+ "condition": "grounded",
+ "run": 1,
+ "date": "2026-11-04 11:49:02",
+ "calls": [
+  {
+   "step": "queries",
+   "data": {
+    "queries": [
+     {
+      "variable": "age",
+      "search_terms": [
+       "abnormal age at diagnosis",
+       "developmental age delay",
+       "delayed age milestone",
+       "premature birth",
+       "advanced age"
+      ]
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "search_terms": [
+       "hypertension",
+       "elevated blood pressure",
+       "high blood pressure",
+       "low blood pressure",
+       "hypotension"
+      ]
+     },
+     {
+      "variable": "cholesterol",
+      "search_terms": [
+       "elevated cholesterol",
+       "high cholesterol",
+       "low cholesterol",
+       "hypercholesterolemia",
+       "hypolipidemia"
+      ]
+     },
+     {
+      "variable": "max_heart_rate",
+      "search_terms": [
+       "bradycardia",
+       "tachycardia",
+       "elevated heart rate",
+       "rapid heart rate",
+       "slow heart rate"
+      ]
+     },
+     {
+      "variable": "st_depression",
+      "search_terms": [
+       "ST segment depression",
+       "ST depression",
+       "electrocardiogram abnormality",
+       "cardiac ischemia",
+       "myocardial ischemia"
+      ]
+     },
+     {
+      "variable": "num_major_vessels",
+      "search_terms": [
+       "coronary artery disease",
+       "coronary artery stenosis",
+       "coronary artery occlusion",
+       "vascular disease",
+       "vascular stenosis"
+      ]
+     },
+     {
+      "variable": "sex",
+      "search_terms": [
+       "female sex",
+       "male sex",
+       "sex determination",
+       "sex chromosome abnormality",
+       "sex development disorder"
+      ]
+     },
+     {
+      "variable": "chest_pain_type",
+      "search_terms": [
+       "chest pain",
+       "angina pectoris",
+       "cardiac pain",
+       "chest discomfort",
+       "cardiac chest pain"
+      ]
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "search_terms": [
+       "hyperglycemia",
+       "elevated blood sugar",
+       "high blood sugar",
+       "diabetes",
+       "hypoglycemia"
+      ]
+     },
+     {
+      "variable": "resting_ecg",
+      "search_terms": [
+       "electrocardiogram abnormality",
+       "ECG abnormality",
+       "cardiac arrhythmia",
+       "heart block",
+       "electrocardiogram change"
+      ]
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "search_terms": [
+       "exercise-induced angina",
+       "chest pain during exercise",
+       "angina pectoris during exercise",
+       "cardiac chest pain during exercise",
+       "cardiac ischemia during exercise"
+      ]
+     },
+     {
+      "variable": "st_slope",
+      "search_terms": [
+       "ST segment abnormality",
+       "ST segment elevation",
+       "ST segment depression",
+       "ST segment flattening",
+       "ST segment inversion"
+      ]
+     },
+     {
+      "variable": "thalassemia",
+      "search_terms": [
+       "cardiac perfusion abnormality",
+       "myocardial perfusion defect",
+       "thallium-201 myocardial perfusion abnormality",
+       "cardiac perfusion scan abnormality",
+       "myocardial perfusion scan abnormality"
+      ]
+     }
+    ]
+   },
+   "thinking": null,
+   "meta": {
+    "model": "llama3.1:8b",
+    "think": null,
+    "options": {
+     "temperature": 0.6,
+     "top_p": 0.9,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 603,
+    "output_tokens": 654,
+    "seconds": 8.6
+   }
+  },
+  {
+   "step": "mapping",
+   "data": {
+    "rules": [
+     {
+      "variable": "age",
+      "rule": "age < 37",
+      "hp_id": "HP:0001622",
+      "hp_label": "Premature birth",
+      "match_type": "exact",
+      "justification": "Premature birth is typically defined as birth before 37 weeks gestation."
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0000822",
+      "hp_label": "Hypertension",
+      "match_type": "exact",
+      "justification": "Hypertension is typically defined as a resting blood pressure >= 140 mmHg."
+     },
+     {
+      "variable": "cholesterol",
+      "rule": "cholesterol >= 200",
+      "hp_id": "HP:0003124",
+      "hp_label": "Hypercholesterolemia",
+      "match_type": "exact",
+      "justification": "Hypercholesterolemia is typically defined as a total cholesterol >= 200 mg/dl."
+     },
+     {
+      "variable": "max_heart_rate",
+      "rule": "max_heart_rate <= 60",
+      "hp_id": "HP:0001662",
+      "hp_label": "Bradycardia",
+      "match_type": "exact",
+      "justification": "Bradycardia is typically defined as a heart rate <= 60 beats per minute."
+     },
+     {
+      "variable": "num_major_vessels",
+      "rule": "num_major_vessels >= 2",
+      "hp_id": "HP:0002621",
+      "hp_label": "Atherosclerosis",
+      "match_type": "exact",
+      "justification": "Atherosclerosis is typically defined as the presence of >= 2 major coronary vessels with stenosis."
+     },
+     {
+      "variable": "sex",
+      "rule": "sex == 'female'",
+      "hp_id": "HP:0030014",
+      "hp_label": "Female sexual dysfunction",
+      "match_type": "exact",
+      "justification": "Female sexual dysfunction is typically defined as sexual dysfunction in females."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type == 'typical angina'",
+      "hp_id": "HP:0001681",
+      "hp_label": "Angina pectoris",
+      "match_type": "exact",
+      "justification": "Angina pectoris is typically defined as typical chest pain during exertion."
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "rule": "fasting_blood_sugar == '>120 mg/dl'",
+      "hp_id": "HP:0003074",
+      "hp_label": "Hyperglycemia",
+      "match_type": "exact",
+      "justification": "Hyperglycemia is typically defined as a fasting blood sugar > 120 mg/dl."
+     },
+     {
+      "variable": "resting_ecg",
+      "rule": "resting_ecg == 'ST-T abnormality'",
+      "hp_id": "HP:0011675",
+      "hp_label": "Arrhythmia",
+      "match_type": "exact",
+      "justification": "Arrhythmia is typically defined as an abnormal heart rhythm."
+     },
+     {
+      "variable": "st_slope",
+      "rule": "st_slope == 'downsloping'",
+      "hp_id": "HP:0012250",
+      "hp_label": "ST segment depression",
+      "match_type": "exact",
+      "justification": "ST segment depression is typically defined as a downsloping ST segment."
+     }
+    ]
+   },
+   "thinking": null,
+   "meta": {
+    "model": "llama3.1:8b",
+    "think": null,
+    "options": {
+     "temperature": 0.6,
+     "top_p": 0.9,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 3428,
+    "output_tokens": 814,
+    "seconds": 12.1
+   }
+  }
+ ],
+ "queries": {
+  "age": [
+   "abnormal age at diagnosis",
+   "developmental age delay",
+   "delayed age milestone",
+   "premature birth",
+   "advanced age"
+  ],
+  "resting_blood_pressure": [
+   "hypertension",
+   "elevated blood pressure",
+   "high blood pressure",
+   "low blood pressure",
+   "hypotension"
+  ],
+  "cholesterol": [
+   "elevated cholesterol",
+   "high cholesterol",
+   "low cholesterol",
+   "hypercholesterolemia",
+   "hypolipidemia"
+  ],
+  "max_heart_rate": [
+   "bradycardia",
+   "tachycardia",
+   "elevated heart rate",
+   "rapid heart rate",
+   "slow heart rate"
+  ],
+  "st_depression": [
+   "ST segment depression",
+   "ST depression",
+   "electrocardiogram abnormality",
+   "cardiac ischemia",
+   "myocardial ischemia"
+  ],
+  "num_major_vessels": [
+   "coronary artery disease",
+   "coronary artery stenosis",
+   "coronary artery occlusion",
+   "vascular disease",
+   "vascular stenosis"
+  ],
+  "sex": [
+   "female sex",
+   "male sex",
+   "sex determination",
+   "sex chromosome abnormality",
+   "sex development disorder"
+  ],
+  "chest_pain_type": [
+   "chest pain",
+   "angina pectoris",
+   "cardiac pain",
+   "chest discomfort",
+   "cardiac chest pain"
+  ],
+  "fasting_blood_sugar": [
+   "hyperglycemia",
+   "elevated blood sugar",
+   "high blood sugar",
+   "diabetes",
+   "hypoglycemia"
+  ],
+  "resting_ecg": [
+   "electrocardiogram abnormality",
+   "ECG abnormality",
+   "cardiac arrhythmia",
+   "heart block",
+   "electrocardiogram change"
+  ],
+  "exercise_induced_angina": [
+   "exercise-induced angina",
+   "chest pain during exercise",
+   "angina pectoris during exercise",
+   "cardiac chest pain during exercise",
+   "cardiac ischemia during exercise"
+  ],
+  "st_slope": [
+   "ST segment abnormality",
+   "ST segment elevation",
+   "ST segment depression",
+   "ST segment flattening",
+   "ST segment inversion"
+  ],
+  "thalassemia": [
+   "cardiac perfusion abnormality",
+   "myocardial perfusion defect",
+   "thallium-201 myocardial perfusion abnormality",
+   "cardiac perfusion scan abnormality",
+   "myocardial perfusion scan abnormality"
+  ]
+ },
+ "candidates": "`age`:\n  - HP:0001622 | Premature birth | parents: Abnormality of prenatal development or birth\n  - HP:0011649 | Patent ductus arteriosus after premature birth | parents: Patent ductus arteriosus\n  - HP:0005100 | Premature birth following premature rupture of fetal membranes | parents: Premature birth, Premature rupture of membranes\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0002615 | Hypotension | parents: Abnormal systemic blood pressure\n  - HP:0002632 | Low-to-normal blood pressure | parents: Hypotension\n  - HP:0001278 | Orthostatic hypotension | parents: Hypotension, Abnormal autonomic nervous system physiology\n  - HP:0500107 | Isolated diastolic hypotension | parents: Decreased diastolic blood pressure\n  - HP:0012641 | Decreased intracranial pressure | parents: Abnormality of intracranial pressure\n  - HP:0005307 | Postural hypotension with compensatory tachycardia | parents: Orthostatic hypotension\n  - HP:0004926 | Orthostatic hypotension due to autonomic dysfunction | parents: Orthostatic hypotension\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0003462 | Elevated 8-dehydrocholesterol | parents: Abnormal circulating cholesterol concentration\n  - HP:0003141 | Elevated circulating LDL-C concentration | parents: Hyperlipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0012184 | Elevated circulating HDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0003362 | Elevated circulating VLDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0033626 | Increased non-HDL cholesterol concentration | parents: Abnormal circulating cholesterol concentration\n  - HP:6000565 | Elevated circulating cholesterol sulfate concentration | parents: Abnormal circulating cholesterol concentration\n  - HP:0010569 | Elevated circulating 7-dehydrocholesterol concentration | parents: Abnormal circulating 7-dehydrocholesterol concentration\n  - HP:0031888 | Abnormal circulating HDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0003233 | Decreased circulating HDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0003349 | Low cholesterol esterification rate | parents: Abnormal circulating enzyme concentration or activity\n  - HP:0003563 | Decreased circulating LDL-C concentration | parents: Hypolipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0031889 | Abnormal circulating VLDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0031243 | Decreased circulating VLDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0045014 | Hypolipidemia | parents: Abnormal circulating lipid concentration\n`max_heart_rate`:\n  - HP:0001662 | Bradycardia | parents: Arrhythmia\n  - HP:0001688 | Sinus bradycardia | parents: Bradycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:0032773 | Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal autonomic seizure\n  - HP:0032784 | Focal aware autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal aware autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0032788 | Focal impaired awareness autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal impaired awareness autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n  - HP:0002621 | Atherosclerosis | parents: Arteriosclerosis\n  - HP:0005297 | Premature occlusive vascular stenosis | parents: Peripheral arterial stenosis\n`sex`:\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0030014 | Female sexual dysfunction | parents: Abnormal female reproductive system physiology\n  - HP:0040307 | Male sexual dysfunction | parents: Abnormal male reproductive system physiology\n  - HP:0012244 | Abnormal sex determination | parents: Abnormal reproductive system morphology\n`chest_pain_type`:\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0009800 | Maternal diabetes | parents: Pregnancy history\n  - HP:0000873 | Diabetes insipidus | parents: Abnormality of the endocrine system\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000863 | Central diabetes insipidus | parents: Diabetes insipidus\n  - HP:0009806 | Nephrogenic diabetes insipidus | parents: Diabetes insipidus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0001943 | Hypoglycemia | parents: Abnormal blood glucose concentration\n  - HP:0001325 | Hypoglycemic coma | parents: Coma\n  - HP:0003162 | Fasting hypoglycemia | parents: Hypoglycemia\n  - HP:0012734 | Ketotic hypoglycemia | parents: Hypoglycemia\n  - HP:0001998 | Neonatal hypoglycemia | parents: Hypoglycemia\n  - HP:0012051 | Reactive hypoglycemia | parents: Hypoglycemia\n  - HP:0001988 | Recurrent hypoglycemia | parents: Hypoglycemia\n  - HP:0001958 | Nonketotic hypoglycemia | parents: Hypoglycemia\n`resting_ecg`:\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0012722 | Heart block | parents: Cardiac conduction abnormality\n  - HP:0001709 | Third degree atrioventricular block | parents: Atrioventricular block\n  - HP:0005170 | Complete heart block with broad QRS complexes | parents: Third degree atrioventricular block\n  - HP:0005178 | Complete heart block with narrow QRS complexes | parents: Third degree atrioventricular block\n`exercise_induced_angina`:\n  (no candidate found)\n`st_slope`:\n  - HP:0004329 | Abnormal posterior eye segment morphology | parents: Abnormal eye morphology\n  - HP:0012251 | ST segment elevation | parents: Abnormal ST segment\n  - HP:6000984 | Coved type ST segment elevation | parents: ST segment elevation\n  - HP:6000985 | Saddle-back type ST segment elevation | parents: ST segment elevation\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`thalassemia`:\n  (no candidate found)",
+ "prompt": "We have a tabular dataset of patients referred for coronary angiography (Cleveland heart disease dataset).\nColumns:\n- `age` (numeric, observed range 29-77, median 56): Age of the patient (years).\n- `resting_blood_pressure` (numeric, observed range 94-200, median 130): Resting systolic blood pressure on admission to the hospital (mmHg).\n- `cholesterol` (numeric, observed range 126-564, median 242.5): Serum total cholesterol (mg/dl).\n- `max_heart_rate` (numeric, observed range 71-202, median 152.5): Maximum heart rate achieved during an exercise stress test (beats per minute).\n- `st_depression` (numeric, observed range 0-6.2, median 0.8): ST depression induced by exercise relative to rest (mm).\n- `num_major_vessels` (numeric, observed range 0-3, median 0): Number of major coronary vessels (0-3) colored by fluoroscopy during angiography.\n- `sex` (categorical, values: 'female', 'male'): Sex of the patient.\n- `chest_pain_type` (categorical, values: 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'): Type of chest pain reported by the patient.\n- `fasting_blood_sugar` (categorical, values: '<=120 mg/dl', '>120 mg/dl'): Fasting blood sugar, dichotomised at 120 mg/dl.\n- `resting_ecg` (categorical, values: 'ST-T abnormality', 'left ventricular hypertrophy', 'normal'): Resting electrocardiographic result.\n- `exercise_induced_angina` (categorical, values: 'no', 'yes'): Angina induced by the exercise stress test.\n- `st_slope` (categorical, values: 'downsloping', 'flat', 'upsloping'): Slope of the peak exercise ST segment.\n- `thalassemia` (categorical, values: 'fixed defect', 'normal', 'reversible defect'): Result of the thallium-201 myocardial perfusion scintigraphy stress test (the column name is historical; it is NOT the blood disorder thalassemia).\n\nTask: align the columns of this dataset with classes of the Human Phenotype Ontology (HPO).\nFor each column, write rules that map values (or value ranges) to the HPO class describing the\nabnormality those values indicate. Each HPO class will become an additional binary column\n(1 if the rule is true for the patient, 0 otherwise) used to train a machine-learning model.\n\nConstraints:\n- HPO describes abnormalities: normal values get no class. Columns that are not phenotypes may get no rule.\n- Choose thresholds from established clinical knowledge, not from this specific dataset.\n- Each `rule` must be a valid pandas `DataFrame.eval` boolean expression using only the column names\n  above and, for categorical columns, the exact values listed (e.g. `col == 'value'`, `col >= 140`,\n  `col in ['a', 'b']`). A rule may combine several columns.\n- Several rules may point to the same HPO class, and one column may yield several classes.\n- `hp_id` must be a real HPO identifier (format HP:0000000) and `hp_label` its exact label.\n- `match_type`: \"exact\" if the class describes the finding exactly, \"broader\" if you had to use a\n  more general class, \"approximate\" if it is a clinical interpretation.\n\nUse ONLY HPO classes from the following candidate list (retrieved from the HPO release we use).\nIf no candidate fits a column, give that column no rule.\n`age`:\n  - HP:0001622 | Premature birth | parents: Abnormality of prenatal development or birth\n  - HP:0011649 | Patent ductus arteriosus after premature birth | parents: Patent ductus arteriosus\n  - HP:0005100 | Premature birth following premature rupture of fetal membranes | parents: Premature birth, Premature rupture of membranes\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0002615 | Hypotension | parents: Abnormal systemic blood pressure\n  - HP:0002632 | Low-to-normal blood pressure | parents: Hypotension\n  - HP:0001278 | Orthostatic hypotension | parents: Hypotension, Abnormal autonomic nervous system physiology\n  - HP:0500107 | Isolated diastolic hypotension | parents: Decreased diastolic blood pressure\n  - HP:0012641 | Decreased intracranial pressure | parents: Abnormality of intracranial pressure\n  - HP:0005307 | Postural hypotension with compensatory tachycardia | parents: Orthostatic hypotension\n  - HP:0004926 | Orthostatic hypotension due to autonomic dysfunction | parents: Orthostatic hypotension\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0003462 | Elevated 8-dehydrocholesterol | parents: Abnormal circulating cholesterol concentration\n  - HP:0003141 | Elevated circulating LDL-C concentration | parents: Hyperlipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0012184 | Elevated circulating HDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0003362 | Elevated circulating VLDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0033626 | Increased non-HDL cholesterol concentration | parents: Abnormal circulating cholesterol concentration\n  - HP:6000565 | Elevated circulating cholesterol sulfate concentration | parents: Abnormal circulating cholesterol concentration\n  - HP:0010569 | Elevated circulating 7-dehydrocholesterol concentration | parents: Abnormal circulating 7-dehydrocholesterol concentration\n  - HP:0031888 | Abnormal circulating HDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0003233 | Decreased circulating HDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating HDL-C concentration\n  - HP:0003349 | Low cholesterol esterification rate | parents: Abnormal circulating enzyme concentration or activity\n  - HP:0003563 | Decreased circulating LDL-C concentration | parents: Hypolipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0031889 | Abnormal circulating VLDL-C concentration | parents: Abnormal circulating lipoprotein cholesterol concentration\n  - HP:0031243 | Decreased circulating VLDL-C concentration | parents: Hypolipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0045014 | Hypolipidemia | parents: Abnormal circulating lipid concentration\n`max_heart_rate`:\n  - HP:0001662 | Bradycardia | parents: Arrhythmia\n  - HP:0001688 | Sinus bradycardia | parents: Bradycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:0032773 | Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal autonomic seizure\n  - HP:0032784 | Focal aware autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal aware autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0032788 | Focal impaired awareness autonomic seizure with palpitations/tachycardia/bradycardia/asystole | parents: Focal impaired awareness autonomic seizure, Focal autonomic seizure with palpitations/tachycardia/bradycardia/asystole\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n  - HP:0002621 | Atherosclerosis | parents: Arteriosclerosis\n  - HP:0005297 | Premature occlusive vascular stenosis | parents: Peripheral arterial stenosis\n`sex`:\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0030014 | Female sexual dysfunction | parents: Abnormal female reproductive system physiology\n  - HP:0040307 | Male sexual dysfunction | parents: Abnormal male reproductive system physiology\n  - HP:0012244 | Abnormal sex determination | parents: Abnormal reproductive system morphology\n`chest_pain_type`:\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0009800 | Maternal diabetes | parents: Pregnancy history\n  - HP:0000873 | Diabetes insipidus | parents: Abnormality of the endocrine system\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000863 | Central diabetes insipidus | parents: Diabetes insipidus\n  - HP:0009806 | Nephrogenic diabetes insipidus | parents: Diabetes insipidus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0001943 | Hypoglycemia | parents: Abnormal blood glucose concentration\n  - HP:0001325 | Hypoglycemic coma | parents: Coma\n  - HP:0003162 | Fasting hypoglycemia | parents: Hypoglycemia\n  - HP:0012734 | Ketotic hypoglycemia | parents: Hypoglycemia\n  - HP:0001998 | Neonatal hypoglycemia | parents: Hypoglycemia\n  - HP:0012051 | Reactive hypoglycemia | parents: Hypoglycemia\n  - HP:0001988 | Recurrent hypoglycemia | parents: Hypoglycemia\n  - HP:0001958 | Nonketotic hypoglycemia | parents: Hypoglycemia\n`resting_ecg`:\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0012722 | Heart block | parents: Cardiac conduction abnormality\n  - HP:0001709 | Third degree atrioventricular block | parents: Atrioventricular block\n  - HP:0005170 | Complete heart block with broad QRS complexes | parents: Third degree atrioventricular block\n  - HP:0005178 | Complete heart block with narrow QRS complexes | parents: Third degree atrioventricular block\n`exercise_induced_angina`:\n  (no candidate found)\n`st_slope`:\n  - HP:0004329 | Abnormal posterior eye segment morphology | parents: Abnormal eye morphology\n  - HP:0012251 | ST segment elevation | parents: Abnormal ST segment\n  - HP:6000984 | Coved type ST segment elevation | parents: ST segment elevation\n  - HP:6000985 | Saddle-back type ST segment elevation | parents: ST segment elevation\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n`thalassemia`:\n  (no candidate found)\n",
+ "rules": [
+  {
+   "variable": "age",
+   "rule": "age < 37",
+   "hp_id": "HP:0001622",
+   "hp_label": "Premature birth",
+   "match_type": "exact",
+   "justification": "Premature birth is typically defined as birth before 37 weeks gestation."
+  },
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0000822",
+   "hp_label": "Hypertension",
+   "match_type": "exact",
+   "justification": "Hypertension is typically defined as a resting blood pressure >= 140 mmHg."
+  },
+  {
+   "variable": "cholesterol",
+   "rule": "cholesterol >= 200",
+   "hp_id": "HP:0003124",
+   "hp_label": "Hypercholesterolemia",
+   "match_type": "exact",
+   "justification": "Hypercholesterolemia is typically defined as a total cholesterol >= 200 mg/dl."
+  },
+  {
+   "variable": "max_heart_rate",
+   "rule": "max_heart_rate <= 60",
+   "hp_id": "HP:0001662",
+   "hp_label": "Bradycardia",
+   "match_type": "exact",
+   "justification": "Bradycardia is typically defined as a heart rate <= 60 beats per minute."
+  },
+  {
+   "variable": "num_major_vessels",
+   "rule": "num_major_vessels >= 2",
+   "hp_id": "HP:0002621",
+   "hp_label": "Atherosclerosis",
+   "match_type": "exact",
+   "justification": "Atherosclerosis is typically defined as the presence of >= 2 major coronary vessels with stenosis."
+  },
+  {
+   "variable": "sex",
+   "rule": "sex == 'female'",
+   "hp_id": "HP:0030014",
+   "hp_label": "Female sexual dysfunction",
+   "match_type": "exact",
+   "justification": "Female sexual dysfunction is typically defined as sexual dysfunction in females."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type == 'typical angina'",
+   "hp_id": "HP:0001681",
+   "hp_label": "Angina pectoris",
+   "match_type": "exact",
+   "justification": "Angina pectoris is typically defined as typical chest pain during exertion."
+  },
+  {
+   "variable": "fasting_blood_sugar",
+   "rule": "fasting_blood_sugar == '>120 mg/dl'",
+   "hp_id": "HP:0003074",
+   "hp_label": "Hyperglycemia",
+   "match_type": "exact",
+   "justification": "Hyperglycemia is typically defined as a fasting blood sugar > 120 mg/dl."
+  },
+  {
+   "variable": "resting_ecg",
+   "rule": "resting_ecg == 'ST-T abnormality'",
+   "hp_id": "HP:0011675",
+   "hp_label": "Arrhythmia",
+   "match_type": "exact",
+   "justification": "Arrhythmia is typically defined as an abnormal heart rhythm."
+  },
+  {
+   "variable": "st_slope",
+   "rule": "st_slope == 'downsloping'",
+   "hp_id": "HP:0012250",
+   "hp_label": "ST segment depression",
+   "match_type": "exact",
+   "justification": "ST segment depression is typically defined as a downsloping ST segment."
+  }
+ ]
+}

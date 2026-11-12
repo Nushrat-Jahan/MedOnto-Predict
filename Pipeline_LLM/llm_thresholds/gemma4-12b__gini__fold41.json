@@ -1,0 +1,400 @@
+{
+ "model": "gemma4:12b",
+ "criterion": "gini",
+ "fold": 41,
+ "prompt": "We enrich a tabular dataset of patients referred for coronary angiography with binary columns derived\nfrom HPO classes. Each rule below starts from a clinical threshold. We now fine-tune each threshold on\nthe TRAINING patients only.\n\nFor each rule, a table lists candidate thresholds around the clinical one, with:\n- `flagged_%` = percentage of training patients for whom the rule is true,\n- `gini` = weighted Gini impurity of the outcome after splitting the training patients with the rule (0 = pure groups, 0.5 = no information; LOWER is better).\n\nChoose, for each rule, the threshold from its table that you consider best: favour the data criterion,\nbut keep the threshold clinically plausible (do not pick an extreme value for a negligible gain).\n`chosen_threshold` must be one of the thresholds listed in the rule's table.\n\nRule G0: `resting_blood_pressure >= threshold` -> Hypertension, Elevated systolic blood pressure (clinical threshold: 140)\n threshold  flagged_%   gini\n     122.5       65.4 0.4848\n     124.5       63.3 0.4869\n     125.5       60.8 0.4899\n     127.0       59.9 0.4901\n     131.0       43.9 0.4846\n     134.5       40.5 0.4877\n     135.5       38.8 0.4855\n     137.0       37.6 0.4869\n     140.0       34.2 0.4847\n     143.0       22.4 0.4878\n     144.5       21.9 0.4891\n     145.5       19.8 0.4925\n     149.0       18.1 0.4925\n     154.0        9.7 0.4920\n     158.0        9.3 0.4904\n\nRule G1: `cholesterol >= threshold` -> Hypercholesterolemia (clinical threshold: 240)\n threshold  flagged_%   gini\n     186.5       90.7 0.4965\n     197.5       86.5 0.4968\n     206.5       79.7 0.4968\n     212.5       73.0 0.4957\n     218.5       69.2 0.4957\n     224.5       64.6 0.4934\n     232.5       59.5 0.4961\n     239.5       52.7 0.4939\n     240.0       52.7 0.4939\n     244.5       47.3 0.4908\n     253.5       42.2 0.4849\n     260.5       36.3 0.4904\n     266.5       31.6 0.4875\n     273.5       28.3 0.4850\n     282.5       23.6 0.4914\n     293.5       19.4 0.4966\n\nRule G2: `st_depression > threshold` -> ST segment depression (clinical threshold: 1)\n threshold  flagged_%   gini\n      0.05       69.2 0.4613\n      0.15       67.1 0.4562\n      0.35       61.2 0.4409\n      0.45       59.5 0.4307\n      0.65       52.7 0.4110\n      0.75       52.3 0.4078\n      0.95       48.1 0.4035\n      1.00       43.9 0.4192\n      1.15       43.0 0.4125\n      1.35       36.3 0.4121\n      1.45       32.5 0.4211\n      1.70       25.7 0.3900\n      1.85       22.4 0.4009\n      2.05       16.9 0.4181\n      2.15       16.5 0.4214\n",
+ "thresholds": {
+  "G0": {
+   "threshold": 140.0,
+   "status": "ok"
+  },
+  "G1": {
+   "threshold": 253.5,
+   "status": "ok"
+  },
+  "G2": {
+   "threshold": 1.7,
+   "status": "ok"
+  },
+  "G3": {
+   "threshold": 0.0,
+   "status": "single_candidate"
+  }
+ },
+ "call": {
+  "data": {
+   "choices": [
+    {
+     "rule_id": "G0",
+     "chosen_threshold": 140.0,
+     "justification": "The clinical threshold is 140.0. While the threshold 131.0 provides a slightly lower Gini impurity (0.4846 vs 0.4847), the gain is negligible (0.0001). Given the instruction to avoid extreme values for negligible gains, 140.0 is the most appropriate choice as it aligns with the clinical standard."
+    },
+    {
+     "rule_id": "G1",
+     "chosen_threshold": 253.5,
+     "justification": "The threshold 253.5 provides the best Gini impurity (0.4849) among the candidates near the clinical threshold. It offers a meaningful improvement over the clinical threshold of 240.0 (0.4939) while remaining clinically plausible for a cohort of patients referred for coronary angiography."
+    },
+    {
+     "rule_id": "G2",
+     "chosen_threshold": 1.7,
+     "justification": "The threshold 1.70 provides the lowest Gini impurity (0.3900) in the table. It offers a significant improvement over the clinical threshold of 1.00 (0.4192) and remains a clinically plausible value for identifying ST segment depression in a high-risk population."
+    }
+   ]
+  },
+  "thinking": "Expert in clinical informatics and biomedical ontologies (specifically HPO).\nSelect the best `chosen_threshold` for three clinical rules based on a provided table of candidates.\n\n        *   Data criterion: Lower `gini` is better.\n        *   Clinical plausibility: Must be near the provided clinical threshold. Avoid extreme values for negligible gains.\n        *   `flagged_%`: Percentage of patients meeting the criteria.\n        *   `gini`: Weighted Gini impurity (lower = better).\n\n    *   *Clinical Threshold:* 140 (Hypertension/Elevated systolic BP).\n    *   *Candidates:*\n        *   122.5 (G: 0.4848)\n        *   124.5 (G: 0.4869)\n        *   125.5 (G: 0.4899)\n        *   127.0 (G: 0.4901)\n        *   131.0 (G: 0.4846)\n        *   134.5 (G: 0.4877)\n        *   135.5 (G: 0.4855)\n        *   137.0 (G: 0.4869)\n        *   140.0 (G: 0.4847)\n        *   143.0 (G: 0.4878)\n        *   144.5 (G: 0.4891)\n        *   145.5 (G: 0.4925)\n        *   149.0 (G: 0.4925)\n        *   154.0 (G: 0.4920)\n        *   158.0 (G: 0.4904)\n    *   *Analysis:*\n        *   Lowest Gini is 0.4846 at 131.0.\n        *   The clinical threshold is 140.0 (Gini 0.4847).\n        *   The difference between 131.0 and 140.0 is a significant drop in `flagged_%` (from 43.9% to 34.2%), but the Gini improvement is tiny (0.0001).\n        *   However, 140.0 is the official clinical threshold.\n        *   Wait, let's look at 131.0 vs 140.0. 131.0 is technically the \"best\" mathematically, but 140.0 is the clinical standard.\n        *   Actually, 131.0 is a very common \"pre-hypertension\" or high-normal cutoff in some contexts, but 140 is the standard.\n        *   Is there a better one near 140? 140.0 has 0.4847. 131.0 has 0.4846.\n        *   Let's re-evaluate \"favour the data criterion\" vs \"keep clinically plausible\".\n        *   131.0 is a very good mathematical choice. But 140.0 is the standard.\n        *   Wait, check the values again. 131.0 (0.4846) is the absolute minimum. 140.0 (0.4847) is the next best.\n        *   I will choose **140.0** because it aligns perfectly with the clinical threshold provided, and the gain from 131.0 is practically non-existent (0.0001).\n\n    *   *Clinical Threshold:* 240 (Hypercholesterolemia).\n    *   *Candidates:*\n        *   186.5 (0.4965)\n        *   197.5 (0.4968)\n        *   206.5 (0.4968)\n        *   212.5 (0.4957)\n        *   218.5 (0.4957)\n        *   224.5 (0.4934)\n        *   232.5 (0.4961)\n        *   239.5 (0.4939)\n        *   240.0 (0.4939)\n        *   244.5 (0.4908)\n        *   253.5 (0.4849)\n        *   260.5 (0.4904)\n        *   266.5 (0.4875)\n        *   273.5 (0.4850)\n        *   282.5 (0.4914)\n        *   293.5 (0.4966)\n    *   *Analysis:*\n        *   The best Gini is 0.4849 at 253.5.\n        *   The next best is 0.4850 at 273.5.\n        *   The clinical threshold is 240.0.\n        *   Between 240 and 253.5, there is a jump in Gini from 0.4939 to 0.4849.\n        *   Is 253.5 \"clinically plausible\" for Hypercholesterolemia? Yes, clinical ranges for high cholesterol often go well above 240.\n        *   However, the prompt says \"do not pick an extreme value for a negligible gain\".\n        *   Is 253.5 an extreme value? It's reasonably close to 240 in the context of cholesterol.\n        *   Let's look at 240.0 vs 253.5. Gini 0.4939 vs 0.4849. That is a noticeable improvement.\n        *   Let's check 273.5 (0.4850). It's slightly worse than 253.5 and further from the clinical threshold.\n        *   I will choose **253.5**.\n\n    *   *Clinical Threshold:* 1 (ST segment depression).\n    *   *Candidates:*\n        *   0.05 (0.4613)\n        *   0.15 (0.4562)\n        *   0.35 (0.4409)\n        *   0.45 (0.4307)\n        *   0.65 (0.4110)\n        *   0.75 (0.4078)\n        *   0.95 (0.4035)\n        *   1.00 (0.4192)\n        *   1.15 (0.4125)\n        *   1.35 (0.4121)\n        *   1.45 (0.4211)\n        *   1.70 (0.3900)\n        *   1.85 (0.4009)\n        *   2.05 (0.4181)\n        *   2.15 (0.4214)\n    *   *Analysis:*\n        *   The best Gini is 0.3900 at 1.70.\n        *   The clinical threshold is 1.00 (Gini 0.4192).\n        *   Is 1.70 a \"negligible gain\" from 1.00?\n        *   Gini at 1.00 = 0.4192.\n        *   Gini at 1.70 = 0.3900.\n        *   Difference = 0.0292. This is a meaningful improvement in impurity.\n        *   However, let's check 0.95 (0.4035). That's very close to 1.00 but has a better Gini.\n        *   Let's check the trend. As the threshold increases from 0.95 to 1.70, the Gini improves significantly until 1.70, then worsens at 1.85.\n        *   In clinical practice, ST segment depression is often measured in millimeters. Values around 1mm are typical. 1.70 is still a very plausible value for identifying clinically significant depression.\n        *   Wait, let's look at the \"flagged_%\" and the \"data criterion\".\n        *   1.70 has the best Gini (0.3900).\n        *   Comparing 1.70 (0.3900) to 0.95 (0.4035). 1.70 is a significant jump in Gini.\n        *   I will choose **1.70**.\n\n    *   Rule G0: 140.0 (Closest to clinical, excellent Gini, avoids the slightly higher Gini at 131).\n    *   Rule G1: 253.5 (Best Gini, reasonably close to clinical).\n    *   Rule G2: 1.70 (Best Gini, clinically plausible).\n\n    *Wait, let's double check G0.*\n    G0 Thresholds:\n    131.0 -> 0.4846\n    140.0 -> 0.4847\n    The difference is 0.0001. 140.0 is the clinical standard. Choosing 140.0 is the most logical \"clinical informatics\" choice as the gain for 131.0 is negligible.\n\n    *Double check G1.*\n    G1 Thresholds:\n    240.0 -> 0.4939\n    253.5 -> 0.4849\n    Improvement = 0.0090.\n    Is 253.5 too far from 240? Not really for cholesterol.\n\n    *Double check G2.*\n    G2 Thresholds:\n    1.00 -> 0.4192\n    1.70 -> 0.3900\n    Improvement = 0.0292.\n    1.70 is a very strong candidate.\n\n    *Wait, let's look at G1 again.*\n    Is there a value between 240 and 253.5? No.\n    Is 253.5 an \"extreme\" value? Usually, thresholds for hypercholesterolemia are 200-240. 253.5 is slightly higher, but in a training set of \"patients referred for coronary angiography,\" these patients are likely higher risk, so 253.5 is a very reasonable threshold to capture the specific cohort's characteristics.\n\n    *One more look at G0.*\n    131.0 is 0.4846.\n    140.0 is 0.4847.\n    If the goal is \"favour the data criterion\", 131.0 is technically better. But the instruction says \"do not pick an extreme value for a negligible gain\". A 0.0001 difference in Gini is the definition of a negligible gain. Therefore, 140.0 is the better choice.\n\n    *One more look at G2.*\n    0.95 is 0.4035.\n    1.70 is 0.3900.\n    Difference = 0.0135.\n    1.70 is the best Gini. It is clinically plausible.\n\n    *Re-checking G1.*\n    Rule G1:\n    240.0 (0.4939)\n    253.5 (0.4849)\n    This is a jump of 0.009.\n    Is there anything else?\n    266.5 (0.4875) - higher gini.\n    273.5 (0.4850) - higher gini.\n    So 253.5 is the local minimum for Gini in that region.\n\n    *Final decision on Rule G0:*\n    Between 131.0 and 140.0.\n    Since 140.0 is the clinical standard and the difference is 0.0001, I will select 140.0.\n\n    *Final decision on Rule G1:*\n    253.5 (Gini 0.4849).\n\n    *Final decision on Rule G2:*\n    1.70 (Gini 0.3900).\n\n    Wait, let me re-read: \"favour the data criterion, but keep the threshold clinically plausible\".\n    For G0, 131.0 is the data criterion peak. However, 140.0 is much more clinically plausible as a standard. 0.0001 is definitely \"negligible\".\n\n    For G1, 253.5 is the data criterion peak. Is it clinically plausible? Yes.\n\n    For G2, 1.70 is the data criterion peak. Is it clinically plausible? Yes.\n\n    Let me check Rule G2 again.\n    0.95 (0.4035)\n    1.00 (0.4192)\n    1.70 (0.3900)\n    1.70 is much better than 1.00.\n\n    Let's check G0 again.\n    131.0 (0.4846)\n    140.0 (0.4847)\n    If I choose 131.0, I am favoring the data criterion. If I choose 140.0, I am favoring the clinical plausibility. The prompt says \"favour the data criterion, but keep... plausible (do not pick an extreme... for a negligible gain)\".\n    Is 131.0 \"extreme\"? No. Is 0.0001 \"negligible\"? Yes.\n    Therefore, 140.0 is preferred because the \"gain\" for 131.0 is negligible.\n\n    Actually, let me look at G1 again.\n    239.5 (0.4939)\n    240.0 (0.4939)\n    244.5 (0.4908)\n    253.5 (0.4849)\n    The jump from 240.0 to 253.5 is clearly the best data-driven move.\n\n    Rule G0: 140.0\n    Rule G1: 253.5\n    Rule G2: 1.70\n\n    Wait, I should check if I missed any values.\n    G0: 131.0 (0.4846), 140.0 (0.4847).\n    G1: 253.5 (0.4849).\n    G2: 1.70 (0.3900).\n\n    One small check:\n    Rule G1: Is 282.5 or 293.5 better? No, they are higher.\n    Rule G0: Is 122.5 better? 0.4848. No, 131.0 (0.4846) is lower.\n\n    Wait, I just noticed Rule G2 has a very low gini at 0.05, 0.15, 0.35, 0.45.\n    0.05 -> 0.4613\n    0.15 -> 0.4562\n    0.35 -> 0.4409\n    0.45 -> 0.4307\n    These are much lower than 1.00 (0.4192), but these thresholds are *not* clinically plausible for \"ST segment depression\" as a binary flag (usually looking for a minimum amount of depression, e.g., > 1mm). Therefore, 1.70 is the best choice that remains plausible.\n\n    One last look at G1.\n    253.5 (0.4849).\n    Is there any reason to prefer 240.0?\n    If \"favour data\" is the primary instruction, 253.5 is better.\n    Is 253.5 \"extreme\"? For a patient referred for angiography, they are likely already identified as high risk, so a slightly higher threshold for \"Hypercholesterolemia\" in this specific population makes sense.\n\n    Let's re-verify G0.\n    131.0 (0.4846) vs 140.0 (0.4847).\n    The difference is 0.0001. This is the definition of \"negligible\".\n    I will provide 140.0.\n\n    Let me reconsider G1.\n    240.0 (0.4939) vs 253.5 (0.4849).\n    Difference is 0.009.\n    Is 0.009 negligible? In many ML contexts, yes, but compared to 0.0001, no.\n    However, 140.0 is the clinical standard.\n    I'll stick with my selections.\n\n    Wait, checking G2 one more time.\n    1.70 (0.3900).\n    Is there any other?\n    0.95 (0.4035).\n    1.70 is clearly better for the data criterion.\n\n    Wait, I see Rule G0 has 131.0 (0.4846) and 140.0 (0.4847).\n    If I choose 140.0, it's the clinical threshold.\n    If I choose 131.0, it's the data threshold.\n    The prompt says \"favour the data criterion, but keep... plausible (do not pick an extreme value for a negligible gain)\".\n    Since the gain of 131.0 over 140.0 is 0.0001, it is a negligible gain.\n    Therefore, 140.0 is the correct choice.\n\n    Wait, Rule G1:\n    240.0 (0.4939)\n    253.5 (0.4849)\n    Difference is 0.009. Is 0.009 negligible?\n    Compared to the scale of Gini (0 to 0.5), 0.009 is quite small.\n    However, 253.5 is very common in clinical studies for high cholesterol.\n\n    Let's check the flag percentages.\n    G0: 131.0 (43.9%), 140.0 (34.2%)\n    G1: 240.0 (52.7%), 253.5 (42.2%)\n    G2: 1.00 (43.9%), 1.70 (25.7%)\n\n    Final check on G2.\n    Is there any reason to pick 0.95? 0.95 (0.4035) is closer to 1.00 than 1.70 is.\n    But 1.70 has a significantly lower Gini.\n\n    I will go with:\n    G0: 140.0\n    G1: 253.5\n    G2: 1.70",
+  "meta": {
+   "model": "gemma4:12b",
+   "think": null,
+   "options": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 64,
+    "seed": 42,
+    "num_ctx": 32768
+   },
+   "done_reason": "stop",
+   "prompt_tokens": 1178,
+   "output_tokens": 4929,
+   "seconds": 52.7
+  }
+ },
+ "tables": {
+  "G0": [
+   {
+    "threshold": 122.5,
+    "flagged_%": 65.4,
+    "auc": 0.574,
+    "gini": 0.4848,
+    "is_clinical": false
+   },
+   {
+    "threshold": 124.5,
+    "flagged_%": 63.3,
+    "auc": 0.5681,
+    "gini": 0.4869,
+    "is_clinical": false
+   },
+   {
+    "threshold": 125.5,
+    "flagged_%": 60.8,
+    "auc": 0.5575,
+    "gini": 0.4899,
+    "is_clinical": false
+   },
+   {
+    "threshold": 127.0,
+    "flagged_%": 59.9,
+    "auc": 0.5568,
+    "gini": 0.4901,
+    "is_clinical": false
+   },
+   {
+    "threshold": 131.0,
+    "flagged_%": 43.9,
+    "auc": 0.5779,
+    "gini": 0.4846,
+    "is_clinical": false
+   },
+   {
+    "threshold": 134.5,
+    "flagged_%": 40.5,
+    "auc": 0.5667,
+    "gini": 0.4877,
+    "is_clinical": false
+   },
+   {
+    "threshold": 135.5,
+    "flagged_%": 38.8,
+    "auc": 0.5738,
+    "gini": 0.4855,
+    "is_clinical": false
+   },
+   {
+    "threshold": 137.0,
+    "flagged_%": 37.6,
+    "auc": 0.5685,
+    "gini": 0.4869,
+    "is_clinical": false
+   },
+   {
+    "threshold": 140.0,
+    "flagged_%": 34.2,
+    "auc": 0.5743,
+    "gini": 0.4847,
+    "is_clinical": true
+   },
+   {
+    "threshold": 143.0,
+    "flagged_%": 22.4,
+    "auc": 0.5563,
+    "gini": 0.4878,
+    "is_clinical": false
+   },
+   {
+    "threshold": 144.5,
+    "flagged_%": 21.9,
+    "auc": 0.5517,
+    "gini": 0.4891,
+    "is_clinical": false
+   },
+   {
+    "threshold": 145.5,
+    "flagged_%": 19.8,
+    "auc": 0.5372,
+    "gini": 0.4925,
+    "is_clinical": false
+   },
+   {
+    "threshold": 149.0,
+    "flagged_%": 18.1,
+    "auc": 0.5359,
+    "gini": 0.4925,
+    "is_clinical": false
+   },
+   {
+    "threshold": 154.0,
+    "flagged_%": 9.7,
+    "auc": 0.5291,
+    "gini": 0.492,
+    "is_clinical": false
+   },
+   {
+    "threshold": 158.0,
+    "flagged_%": 9.3,
+    "auc": 0.533,
+    "gini": 0.4904,
+    "is_clinical": false
+   }
+  ],
+  "G1": [
+   {
+    "threshold": 186.5,
+    "flagged_%": 90.7,
+    "auc": 0.5075,
+    "gini": 0.4965,
+    "is_clinical": false
+   },
+   {
+    "threshold": 197.5,
+    "flagged_%": 86.5,
+    "auc": 0.5024,
+    "gini": 0.4968,
+    "is_clinical": false
+   },
+   {
+    "threshold": 206.5,
+    "flagged_%": 79.7,
+    "auc": 0.5006,
+    "gini": 0.4968,
+    "is_clinical": false
+   },
+   {
+    "threshold": 212.5,
+    "flagged_%": 73.0,
+    "auc": 0.5207,
+    "gini": 0.4957,
+    "is_clinical": false
+   },
+   {
+    "threshold": 218.5,
+    "flagged_%": 69.2,
+    "auc": 0.5219,
+    "gini": 0.4957,
+    "is_clinical": false
+   },
+   {
+    "threshold": 224.5,
+    "flagged_%": 64.6,
+    "auc": 0.5393,
+    "gini": 0.4934,
+    "is_clinical": false
+   },
+   {
+    "threshold": 232.5,
+    "flagged_%": 59.5,
+    "auc": 0.5183,
+    "gini": 0.4961,
+    "is_clinical": false
+   },
+   {
+    "threshold": 239.5,
+    "flagged_%": 52.7,
+    "auc": 0.5383,
+    "gini": 0.4939,
+    "is_clinical": false
+   },
+   {
+    "threshold": 240.0,
+    "flagged_%": 52.7,
+    "auc": 0.5383,
+    "gini": 0.4939,
+    "is_clinical": true
+   },
+   {
+    "threshold": 244.5,
+    "flagged_%": 47.3,
+    "auc": 0.5551,
+    "gini": 0.4908,
+    "is_clinical": false
+   },
+   {
+    "threshold": 253.5,
+    "flagged_%": 42.2,
+    "auc": 0.5765,
+    "gini": 0.4849,
+    "is_clinical": false
+   },
+   {
+    "threshold": 260.5,
+    "flagged_%": 36.3,
+    "auc": 0.5548,
+    "gini": 0.4904,
+    "is_clinical": false
+   },
+   {
+    "threshold": 266.5,
+    "flagged_%": 31.6,
+    "auc": 0.5638,
+    "gini": 0.4875,
+    "is_clinical": false
+   },
+   {
+    "threshold": 273.5,
+    "flagged_%": 28.3,
+    "auc": 0.5695,
+    "gini": 0.485,
+    "is_clinical": false
+   },
+   {
+    "threshold": 282.5,
+    "flagged_%": 23.6,
+    "auc": 0.5445,
+    "gini": 0.4914,
+    "is_clinical": false
+   },
+   {
+    "threshold": 293.5,
+    "flagged_%": 19.4,
+    "auc": 0.5072,
+    "gini": 0.4966,
+    "is_clinical": false
+   }
+  ],
+  "G2": [
+   {
+    "threshold": 0.05,
+    "flagged_%": 69.2,
+    "auc": 0.6238,
+    "gini": 0.4613,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.15,
+    "flagged_%": 67.1,
+    "auc": 0.6348,
+    "gini": 0.4562,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.35,
+    "flagged_%": 61.2,
+    "auc": 0.664,
+    "gini": 0.4409,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.45,
+    "flagged_%": 59.5,
+    "auc": 0.6797,
+    "gini": 0.4307,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.65,
+    "flagged_%": 52.7,
+    "auc": 0.7082,
+    "gini": 0.411,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.75,
+    "flagged_%": 52.3,
+    "auc": 0.7121,
+    "gini": 0.4078,
+    "is_clinical": false
+   },
+   {
+    "threshold": 0.95,
+    "flagged_%": 48.1,
+    "auc": 0.7172,
+    "gini": 0.4035,
+    "is_clinical": false
+   },
+   {
+    "threshold": 1.0,
+    "flagged_%": 43.9,
+    "auc": 0.6968,
+    "gini": 0.4192,
+    "is_clinical": true
+   },
+   {
+    "threshold": 1.15,
+    "flagged_%": 43.0,
+    "auc": 0.7046,
+    "gini": 0.4125,
+    "is_clinical": false
+   },
+   {
+    "threshold": 1.35,
+    "flagged_%": 36.3,
+    "auc": 0.6991,
+    "gini": 0.4121,
+    "is_clinical": false
+   },
+   {
+    "threshold": 1.45,
+    "flagged_%": 32.5,
+    "auc": 0.6833,
+    "gini": 0.4211,
+    "is_clinical": false
+   },
+   {
+    "threshold": 1.7,
+    "flagged_%": 25.7,
+    "auc": 0.7034,
+    "gini": 0.39,
+    "is_clinical": false
+   },
+   {
+    "threshold": 1.85,
+    "flagged_%": 22.4,
+    "auc": 0.6837,
+    "gini": 0.4009,
+    "is_clinical": false
+   },
+   {
+    "threshold": 2.05,
+    "flagged_%": 16.9,
+    "auc": 0.6495,
+    "gini": 0.4181,
+    "is_clinical": false
+   },
+   {
+    "threshold": 2.15,
+    "flagged_%": 16.5,
+    "auc": 0.6449,
+    "gini": 0.4214,
+    "is_clinical": false
+   }
+  ],
+  "G3": [
+   {
+    "threshold": 0.0,
+    "flagged_%": 40.9,
+    "auc": 0.7581,
+    "gini": 0.3608,
+    "is_clinical": true
+   }
+  ]
+ }
+}

@@ -1,0 +1,457 @@
+{
+ "model": "qwen3:14b",
+ "condition": "grounded",
+ "run": 1,
+ "date": "2026-11-04 11:43:31",
+ "calls": [
+  {
+   "step": "queries",
+   "data": {
+    "queries": [
+     {
+      "variable": "age",
+      "search_terms": [
+       "elderly",
+       "senile",
+       "advanced age",
+       "aging",
+       "age-related"
+      ]
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "search_terms": [
+       "hypertension",
+       "elevated blood pressure",
+       "hypertensive disorder",
+       "high blood pressure",
+       "arterial hypertension"
+      ]
+     },
+     {
+      "variable": "cholesterol",
+      "search_terms": [
+       "hypercholesterolemia",
+       "dyslipidemia",
+       "elevated low-density lipoprotein cholesterol",
+       "hyperlipidemia",
+       "lipid disorder"
+      ]
+     },
+     {
+      "variable": "max_heart_rate",
+      "search_terms": [
+       "tachycardia",
+       "elevated heart rate",
+       "abnormal heart rate",
+       "arrhythmia",
+       "sinus tachycardia"
+      ]
+     },
+     {
+      "variable": "st_depression",
+      "search_terms": [
+       "ST segment depression",
+       "myocardial ischemia",
+       "abnormal ST segment",
+       "exercise-induced ST depression",
+       "ST-T wave abnormality"
+      ]
+     },
+     {
+      "variable": "num_major_vessels",
+      "search_terms": [
+       "coronary artery disease",
+       "multivessel coronary artery disease",
+       "coronary vessel abnormalities",
+       "coronary artery stenosis",
+       "coronary artery occlusion"
+      ]
+     },
+     {
+      "variable": "sex",
+      "search_terms": [
+       "male",
+       "female",
+       "sex-related disorder",
+       "gender-specific condition",
+       "male predominance"
+      ]
+     },
+     {
+      "variable": "chest_pain_type",
+      "search_terms": [
+       "angina pectoris",
+       "chest pain",
+       "non-anginal chest pain",
+       "atypical angina",
+       "typical angina"
+      ]
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "search_terms": [
+       "hyperglycemia",
+       "diabetes mellitus",
+       "elevated fasting blood glucose",
+       "impaired fasting glucose",
+       "glucose intolerance"
+      ]
+     },
+     {
+      "variable": "resting_ecg",
+      "search_terms": [
+       "abnormal resting electrocardiogram",
+       "left ventricular hypertrophy",
+       "ST-T abnormality",
+       "electrocardiographic abnormality",
+       "ECG abnormality"
+      ]
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "search_terms": [
+       "angina pectoris",
+       "exercise-induced angina",
+       "myocardial ischemia",
+       "angina during exercise",
+       "ischemic heart disease"
+      ]
+     },
+     {
+      "variable": "st_slope",
+      "search_terms": [
+       "abnormal ST segment slope",
+       "ST segment flat",
+       "ST segment upsloping",
+       "ST segment downsloping",
+       "ST-T wave abnormality"
+      ]
+     },
+     {
+      "variable": "thalassemia",
+      "search_terms": [
+       "abnormal myocardial perfusion",
+       "myocardial ischemia",
+       "thallium-201 myocardial perfusion defect",
+       "myocardial perfusion abnormality",
+       "cardiac perfusion defect"
+      ]
+     }
+    ]
+   },
+   "thinking": "Okay, let's tackle this problem. The user wants to map each column in their Cleveland heart disease dataset to HPO classes. For each column, they need 1-5 search terms that could be used to find the relevant HPO classes. \n\nFirst, I need to understand each column's meaning. Let's go through them one by one.\n\nStarting with age. Age is a numerical value, but the HPO deals with phenotypic abnormalities. So, for age, maybe looking for terms related to aging or age-related conditions. However, since the dataset is about heart disease, perhaps \"elderly\" or \"senile\" might be relevant. But I should check if HPO has specific classes for age-related issues. Maybe \"abnormal aging\" or \"advanced age\" could be search terms.\n\nNext, resting blood pressure. High blood pressure is a common issue. The HPO might have terms like \"hypertension\" or \"elevated blood pressure.\" Also, \"hypertensive disorder\" could be a term. Since the median is 130, which is within normal range, but the dataset includes values up to 200. So, focusing on elevated values.\n\nCholesterol is next. High cholesterol is a risk factor. Terms like \"hypercholesterolemia\" or \"elevated low-density lipoprotein cholesterol.\" Also, \"dyslipidemia\" might be relevant. HPO might have specific classes for these.\n\nMax heart rate. Low heart rate (bradycardia) or high (tachycardia). But the dataset's max is 202, which is on the higher side. So, terms like \"tachycardia\" or \"elevated heart rate.\" But also, maybe \"abnormal heart rate\" in general.\n\nST depression. This is a cardiac finding. The HPO might have terms like \"ST segment depression\" or \"abnormal ST segment.\" Also, \"myocardial ischemia\" since ST depression can indicate that. \"Exercise-induced ST segment depression\" might be more specific.\n\nNumber of major vessels. This is about coronary artery disease. Terms like \"coronary artery disease\" or \"multivessel coronary artery disease.\" \"Coronary vessel abnormalities\" could also be relevant.\n\nSex. This is a demographic variable, so HPO might not have specific classes for male or female. But if considering sex-related conditions, terms like \"male predominance\" or \"female predominance\" might be used, though I'm not sure if HPO includes these.\n\nChest pain type. Different types of chest pain. Terms like \"angina pectoris\" for typical angina, \"atypical angina,\" \"non-anginal chest pain,\" and \"asymptomatic\" might not be directly in HPO. But \"chest pain\" in general, \"angina pectoris,\" and \"non-anginal chest pain\" could be search terms.\n\nFasting blood sugar. High blood sugar is \"hyperglycemia\" or \"elevated fasting blood glucose.\" Since it's dichotomized at 120, which is the threshold for diabetes, \"diabetes mellitus\" might be relevant. \"Impaired fasting glucose\" could also be a term.\n\nResting ECG. Abnormal ECG results like \"ST-T abnormality\" or \"left ventricular hypertrophy.\" HPO might have terms for these specific ECG findings. \"Abnormal resting electrocardiogram\" and \"left ventricular hypertrophy\" are possibilities.\n\nExercise-induced angina. This is a direct indicator of angina, so \"angina pectoris\" and \"exercise-induced angina\" would be good terms. Also, \"myocardial ischemia\" as a result.\n\nST slope. The slope of the ST segment. Terms like \"abnormal ST segment slope\" or \"ST segment upsloping/downsloping.\" HPO might have specific terms for these slopes, such as \"ST segment flat\" or \"ST segment downsloping.\"\n\nThalassemia (but it's actually thallium test results). The column name is misleading. The actual term is thallium-201 myocardial perfusion scintigraphy. So, terms like \"abnormal myocardial perfusion\" or \"myocardial ischemia\" could be relevant. Also, \"thallium-201 myocardial perfusion defect\" might be a specific term.\n\nI need to make sure that the search terms are likely to be found in HPO labels or synonyms. For example, \"hypertension\" is a common HPO term. \"Hypercholesterolemia\" as well. For ST depression, \"ST segment depression\" is a direct term. For coronary vessels, \"coronary artery disease\" is a key term.\n\nI should also consider if any of these are more specific. For example, \"typical angina\" is a type of angina, so \"angina pectoris\" is a general term, but \"typical angina\" might not be in HPO. However, the user wants search terms that could appear in HPO, so even if the exact term isn't there, the general term is okay.\n\nFor sex, since HPO is about phenotypic abnormalities, maybe there's no direct class for being male or female, but conditions that are sex-related. However, the user might be looking for terms that could be used to find such classes. But since the dataset's sex column is just a demographic, maybe it's not directly mappable. However, the user might still want to include terms like \"male\" or \"female\" as search terms, even if HPO doesn't have those classes.\n\nSimilarly, for chest pain type, \"asymptomatic\" might not be a HPO class, but \"absence of chest pain\" could be a term.\n\nI should also check if any of these terms are more commonly used in HPO. For example, \"dyslipidemia\" is a broader term than \"hypercholesterolemia,\" but both might be relevant.\n\nPutting this all together, I'll list for each column the possible HPO search terms, keeping them concise and relevant.\n",
+   "meta": {
+    "model": "qwen3:14b",
+    "think": true,
+    "options": {
+     "temperature": 0.6,
+     "top_p": 0.95,
+     "top_k": 20,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 630,
+    "output_tokens": 1911,
+    "seconds": 46.4
+   }
+  },
+  {
+   "step": "mapping",
+   "data": {
+    "rules": [
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0004421",
+      "hp_label": "Elevated systolic blood pressure",
+      "match_type": "exact",
+      "justification": "Systolic blood pressure ≥140 mmHg is the clinical threshold for elevated systolic blood pressure (HPO class HP:0004421)."
+     },
+     {
+      "variable": "resting_blood_pressure",
+      "rule": "resting_blood_pressure >= 140",
+      "hp_id": "HP:0000822",
+      "hp_label": "Hypertension",
+      "match_type": "broader",
+      "justification": "Systolic blood pressure ≥140 mmHg is a manifestation of hypertension (HPO class HP:0000822), which is a broader category."
+     },
+     {
+      "variable": "cholesterol",
+      "rule": "cholesterol >= 240",
+      "hp_id": "HP:0003124",
+      "hp_label": "Hypercholesterolemia",
+      "match_type": "exact",
+      "justification": "Total cholesterol ≥240 mg/dl is the clinical threshold for hypercholesterolemia (HPO class HP:0003124)."
+     },
+     {
+      "variable": "max_heart_rate",
+      "rule": "max_heart_rate > 100",
+      "hp_id": "HP:0001649",
+      "hp_label": "Tachycardia",
+      "match_type": "exact",
+      "justification": "Heart rate >100 bpm is the clinical threshold for tachycardia (HPO class HP:0001649)."
+     },
+     {
+      "variable": "st_depression",
+      "rule": "st_depression >= 1",
+      "hp_id": "HP:0012250",
+      "hp_label": "ST segment depression",
+      "match_type": "exact",
+      "justification": "ST depression ≥1 mm is the clinical threshold for ST segment depression (HPO class HP:0012250)."
+     },
+     {
+      "variable": "num_major_vessels",
+      "rule": "num_major_vessels >= 1",
+      "hp_id": "HP:0005145",
+      "hp_label": "Coronary artery stenosis",
+      "match_type": "approximate",
+      "justification": "Presence of any major coronary vessel stenosis (≥1 vessel) is associated with coronary artery stenosis (HPO class HP:0005145). This is an approximate mapping as vessel count alone does not fully define stenosis severity."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type in ['atypical angina', 'typical angina']",
+      "hp_id": "HP:0001681",
+      "hp_label": "Angina pectoris",
+      "match_type": "exact",
+      "justification": "Typical and atypical angina are recognized manifestations of angina pectoris (HPO class HP:0001681)."
+     },
+     {
+      "variable": "chest_pain_type",
+      "rule": "chest_pain_type != 'asymptomatic'",
+      "hp_id": "HP:0100749",
+      "hp_label": "Chest pain",
+      "match_type": "broader",
+      "justification": "Any chest pain type other than asymptomatic indicates presence of chest pain (HPO class HP:0100749), a broader category."
+     },
+     {
+      "variable": "fasting_blood_sugar",
+      "rule": "fasting_blood_sugar == '>120 mg/dl'",
+      "hp_id": "HP:0025691",
+      "hp_label": "Impaired fasting glucose",
+      "match_type": "approximate",
+      "justification": "Fasting blood sugar >120 mg/dl is interpreted as impaired fasting glucose (HPO class HP:0025691), an approximate mapping as the exact threshold for impaired glucose is 100-125 mg/dl."
+     },
+     {
+      "variable": "resting_ecg",
+      "rule": "resting_ecg == 'left ventricular hypertrophy'",
+      "hp_id": "HP:0001712",
+      "hp_label": "Left ventricular hypertrophy",
+      "match_type": "exact",
+      "justification": "Resting ECG finding of left ventricular hypertrophy directly maps to HPO class HP:0001712."
+     },
+     {
+      "variable": "exercise_induced_angina",
+      "rule": "exercise_induced_angina == 'yes'",
+      "hp_id": "HP:0001681",
+      "hp_label": "Angina pectoris",
+      "match_type": "exact",
+      "justification": "Exercise-induced angina is a recognized manifestation of angina pectoris (HPO class HP:0001681)."
+     }
+    ]
+   },
+   "thinking": "Okay, let's tackle this problem step by step. The goal is to align each column of the Cleveland heart disease dataset with the appropriate HPO classes. Each column needs to be mapped using rules that can be evaluated as boolean expressions in pandas. The rules must use the exact column names and values provided, and the HPO IDs must be from the given candidate list.\n\nStarting with the 'age' column. The HPO candidates here are things like Cautious gait, Senile plaques, Presenile cataracts, etc. But looking at the dataset, age is a numeric value with a median of 56. The HPO classes listed for age seem to be related to aging but not directly to age as a risk factor. However, the task is to map abnormalities indicated by the values. Since HPO describes abnormalities and normal values don't get a class, I need to see if there's a relevant HPO class that corresponds to age-related conditions. The 'Typified by age-related disease onset' (HP:0003831) might be a candidate, but it's an inheritance qualifier. Maybe 'Prematurely aged appearance' (HP:0007495) could be relevant if the age is very high, but the dataset's max age is 77, which isn't extremely old. However, the problem states that HPO describes abnormalities, and normal values don't get a class. Since age itself isn't an abnormality, perhaps there are no applicable HPO classes here. But looking at the candidate list again, there's HP:0007819 (Presenile cataracts) which might be related to age, but that's a specific condition. Without a clear threshold for age indicating a specific abnormality, maybe 'age' doesn't map to any HPO classes. The task says to use established clinical knowledge, so perhaps there's no HPO class for age as a standalone value.\n\nNext, 'resting_blood_pressure'. The HPO classes here are hypertension-related. The dataset has values from 94 to 200 mmHg. Hypertension is typically defined as systolic BP ≥140 mmHg or diastolic ≥90 mmHg. So, for 'resting_blood_pressure', if the value is ≥140, that would map to HP:0000822 (Hypertension). Also, HP:0004421 (Elevated systolic blood pressure) might be a more specific class. However, the candidate list includes HP:0000822 (Hypertension) and HP:0004421 (Elevated systolic blood pressure). Since the column is 'resting_blood_pressure', which is systolic, using HP:0004421 might be more accurate. But the rule would be 'resting_blood_pressure >= 140' to indicate hypertension. However, the HPO class for hypertension is HP:0000822. So maybe both classes can be used. But the instructions say to use the candidate list. The candidate list includes HP:0000822 (Hypertension) and HP:0004421 (Elevated systolic blood pressure). So, if the BP is ≥140, then HP:0004421 (Elevated systolic) and HP:0000822 (Hypertension) could both be applicable. But the user might prefer the more general class. However, the rules can have multiple HPO classes per column. So, two rules for 'resting_blood_pressure' could be created: one for HP:0000822 (Hypertension) with the condition >=140, and another for HP:0004421 (Elevated systolic) with the same condition. But the HPO class HP:0004421 is a child of HP:0000822 (Hypertension), so perhaps using HP:0004421 is more specific. Need to check if that's allowed. The task allows for multiple HPO classes per column, so both could be included. However, the example might prefer the most specific class. So, for 'resting_blood_pressure' >=140, map to HP:0004421 (Elevated systolic blood pressure) and HP:0000822 (Hypertension). But the instruction says to use the candidate list. The candidate list includes both HP:0004421 and HP:0000822. So both are valid.\n\nMoving to 'cholesterol'. The HPO classes here are hypercholesterolemia, hyperlipidemia, etc. The dataset has cholesterol values ranging from 126 to 564 mg/dl. The threshold for hypercholesterolemia is typically ≥240 mg/dl. However, the HPO class HP:0003124 is Hypercholesterolemia. So, if the cholesterol is >=240, then map to HP:0003124. Also, HP:0003077 (Hyperlipidemia) is a broader class. But the candidate list includes HP:0003124 and HP:0003077. So, for cholesterol >=240, both classes might be applicable. However, the rule for HP:0003124 would be 'cholesterol >= 240', and for HP:0003077, perhaps 'cholesterol >= 200' (as hyperlipidemia is more general). But the problem states to use established clinical knowledge. The standard cutoff for hypercholesterolemia is indeed ≥240, so that's the threshold to use. So, the rule would be 'cholesterol >= 240' mapping to HP:0003124 (Hypercholesterolemia). Also, hyperlipidemia (HP:0003077) might be considered as a broader class. However, without a specific threshold for hyperlipidemia in the candidate list, maybe only HP:0003124 is applicable here.\n\nNext, 'max_heart_rate'. The HPO classes include tachycardia and related terms. The dataset has max_heart_rate from 71 to 202. Tachycardia is typically defined as a heart rate >100 bpm. So, if max_heart_rate >100, then map to HP:0001649 (Tachycardia). However, looking at the candidate list, HP:0001649 is Tachycardia. So the rule would be 'max_heart_rate > 100' mapping to HP:0001649. Also, there's HP:0011703 (Sinus tachycardia) and others, but the most general class here is Tachycardia. So the rule would be for HP:0001649 with the condition.\n\nFor 'st_depression', the HPO classes include ST segment depression (HP:0012250). The dataset has st_depression ranging from 0 to 6.2. ST depression is typically considered abnormal if it's ≥1 mm. So, if st_depression >= 1, then map to HP:0012250 (ST segment depression). The rule would be 'st_depression >= 1'.\n\n'num_major_vessels' ranges from 0 to 3. The HPO classes here are related to coronary artery disease. For example, HP:0005181 (Premature coronary artery atherosclerosis) and HP:0005145 (Coronary artery stenosis). However, the number of vessels (0-3) might indicate the severity. Typically, more than 2 vessels might be considered significant. So, if num_major_vessels >= 2, then map to HP:0005145 (Coronary artery stenosis). But need to check the HPO classes. HP:0005145 is Coronary artery stenosis. However, the candidate list also includes HP:0005181 (Premature coronary artery atherosclerosis) and HP:0012436 (Nonocclusive coronary artery atherosclerosis). But the exact mapping might not be clear. Alternatively, if num_major_vessels >= 1, that could indicate some stenosis. But the threshold is not clear. Since the HPO classes are about atherosclerosis and stenosis, perhaps the number of vessels is a proxy for severity. However, without a clear clinical threshold, this might be tricky. Maybe using a threshold of >=1 for HP:0005145 (Coronary artery stenosis) as presence of any vessel involvement indicates stenosis. But I need to verify if that's a standard practice. Alternatively, if the number of vessels is 3, that's a severe case. However, the candidate list doesn't have a class that directly maps to the number of vessels. The HPO classes provided are about the condition (e.g., stenosis) not the count. Therefore, perhaps 'num_major_vessels' can be mapped to HP:0005145 (Coronary artery stenosis) if the value is >=1, indicating the presence of stenosis. But this is an assumption. Alternatively, if the number is 0, it's normal, and any number >=1 is abnormal. But the problem states that HPO classes are for abnormalities, so any value >=1 would map to the class. But need to check the HPO class definitions. HP:0005145 is Coronary artery stenosis, which is a condition where there's a narrowing of the artery. So, the presence of any vessel (num_major_vessels >=1) might indicate stenosis. Therefore, the rule would be 'num_major_vessels >= 1' mapping to HP:0005145.\n\nFor 'sex', the HPO classes are related to conditions like gynecomastia, infertility, etc. However, the 'sex' column is categorical with 'female' and 'male' values. Since the HPO classes listed are for specific conditions (e.g., male infertility, female hypogonadism), but the 'sex' column itself is a demographic variable, not an abnormality. Therefore, unless the sex is associated with a condition (e.g., male hypogonadism), but the column itself doesn't indicate an abnormality. Therefore, 'sex' might not map to any HPO classes unless there's a condition that's sex-related. However, the task says to map values that indicate abnormalities. Since the 'sex' column is just the patient's sex and not an abnormality, there might be no HPO classes here. Unless, for example, 'male' maps to HP:0000771 (Gynecomastia), but that's a specific condition, not the sex itself. Therefore, 'sex' might not have any applicable HPO classes.\n\n'chest_pain_type' has categories like 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'. The HPO classes include 'Angina pectoris' (HP:0001681) and 'Chest pain' (HP:0100749). Since 'typical angina' and 'atypical angina' are types of angina pectoris, which is HP:0001681. So, for 'chest_pain_type' in ['typical angina', 'atypical angina'], map to HP:0001681. Also, 'non-anginal pain' and 'asymptomatic' might not map to any HPO classes, but the task says to map abnormalities. Since 'asymptomatic' is not an abnormality, and 'non-anginal pain' is a type of chest pain, but not angina. However, HP:0100749 is 'Chest pain', which is a broader category. So, for 'chest_pain_type' in ['non-anginal pain', 'asymptomatic'], perhaps 'asymptomatic' is not an abnormality, but 'non-anginal pain' might be considered under 'Chest pain' (HP:0100749). However, the HPO class HP:0100749 is 'Chest pain', which is a symptom. So, if the chest pain is present (i.e., not 'asymptomatic'), then map to HP:0100749. But the categories are 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'. So 'asymptomatic' is not a chest pain, others are. Therefore, the rule would be 'chest_pain_type != \"asymptomatic\"' mapping to HP:0100749 (Chest pain). Additionally, 'atypical angina' and 'typical angina' map to HP:0001681 (Angina pectoris). So two rules for 'chest_pain_type': one for HP:0100749 when the type is not asymptomatic, and another for HP:0001681 when the type is either 'atypical angina' or 'typical angina'.\n\n'fasting_blood_sugar' has values '<=120 mg/dl' and '>120 mg/dl'. The HPO classes include hyperglycemia, diabetes, etc. The threshold for hyperglycemia is typically >126 mg/dl, but the dataset uses 120 as the cutoff. However, the HPO class HP:0003074 (Hyperglycemia) is for blood glucose concentration >126. The dataset's cutoff is 120, which might be lower. However, the instruction says to use established clinical knowledge, not the dataset's thresholds. Therefore, the correct threshold for hyperglycemia is >126, so if the value is '>120', it's not enough. But the dataset's column is dichotomized at 120. However, the HPO class HP:0025691 (Impaired fasting glucose) is for values between 100-125 mg/dl. So, if the value is '>120', that would be in the range of impaired fasting glucose (assuming 120 is the upper limit of normal, but actually, impaired is 100-125). So, for '>120', that might be hyperglycemia (if the actual value is >126) or impaired. But the dataset's cutoff is 120, which may not align with HPO's. However, the user says to use established thresholds. So, the HPO class HP:0025691 (Impaired fasting glucose) is for 100-125, and HP:0003074 (Hyperglycemia) for >126. Since the dataset's value is '>120', which could be in the impaired range or hyperglycemia. But without knowing the exact value, perhaps the best we can do is map '>120' to HP:0025691 (Impaired fasting glucose) and '>126' to HP:0003074. However, the dataset only has '<=120' and '>120', not the exact value. Therefore, '>120' could be either impaired or hyperglycemia. But the HPO class HP:0025691 is for impaired, which is 100-125. So, if the dataset's '>120' is considered as in the impaired range, then map to HP:0025691. Alternatively, if the value is >120, it's considered hyperglycemia. But this is a point of contention. However, the HPO class HP:0025691 is for impaired fasting glucose, which is 100-125. Therefore, if the dataset's '>120' is in that range, it's impaired. But the dataset's cutoff is 120, which is lower than the HPO's 125. Therefore, mapping '>120' to HP:0025691 is not accurate, as it could be in the range of 120-125 (impairment) or >125 (hyperglycemia). However, since the dataset's values are dichotomized, and the HPO class HP:0025691 is for impaired, perhaps the best we can do is map '>120' to HP:0025691. But this might not be accurate. Alternatively, if the dataset's '>120' is considered hyperglycemia, but that's not standard. This is a tricky part. However, the user's instruction says to use established clinical knowledge. The standard for impaired fasting glucose is 100-125, and hyperglycemia is >126. Therefore, the dataset's '>120' could be in the impaired range or hyperglycemia. Since the dataset doesn't have the exact value, perhaps we can't map it accurately. However, the HPO class HP:0025691 is for impaired fasting glucose, which is 100-125. So, if the value is '>120', it's in the range of impaired, but if it's >125, it's hyperglycemia. Since the dataset's column is dichotomized, maybe we can't distinguish between these. Therefore, the best possible mapping is to map '>120' to HP:0025691 (Impaired fasting glucose) as a possible interpretation. However, this might be an approximate match, so the match_type would be 'approximate'.\n\n'resting_ecg' has values like 'ST-T abnormality', 'left ventricular hypertrophy', 'normal'. The HPO classes include 'Left ventricular hypertrophy' (HP:0001712). So, if the resting_ecg is 'left ventricular hypertrophy', map to HP:0001712. For 'ST-T abnormality', there's no direct HPO class in the candidate list. The candidate list includes HP:0012249 (Abnormal ST segment) and HP:0012250 (ST segment depression). But 'ST-T abnormality' is a different finding. However, HP:0012249 (Abnormal ST segment) might be a broader class. So, if the resting_ecg is 'ST-T abnormality', map to HP:0012249. However, the candidate list doesn't have HP:0012249 listed for 'resting_ecg'. Wait, looking back, the candidate list for 'resting_ecg' includes HP:0001712 (Left ventricular hypertrophy) and others that don't seem relevant. So, 'left ventricular hypertrophy' maps to HP:0001712. 'ST-T abnormality' might not have a direct HPO class in the candidate list, but HP:0012249 is listed under other columns. However, the task says to use the candidate list provided. The candidate list for 'resting_ecg' includes HP:0001712 (Left ventricular hypertrophy), which matches 'left ventricular hypertrophy' in the column. 'ST-T abnormality' might not map to any HPO class in the candidate list. Therefore, only 'left ventricular hypertrophy' would map to HP:0001712, and 'normal' doesn't indicate an abnormality. So, the rule for 'resting_ecg' == 'left ventricular hypertrophy' maps to HP:0001712.\n\n'exercise_induced_angina' has values 'no' and 'yes'. The HPO class HP:0001681 (Angina pectoris) is listed. So, if the value is 'yes', map to HP:0001681.\n\n'st_slope' has no candidate HPO classes, so no rules.\n\n'thalassemia' also has no candidate HPO classes, so no rules.\n\nNow, compiling all the rules with the appropriate HPO classes and match types.\n\nFor 'resting_blood_pressure', using the threshold of >=140 for systolic hypertension (HP:0004421) and HP:0000822 (Hypertension). However, the HPO class HP:0004421 is a child of HP:0000822, so using HP:0004421 might be more specific. But the candidate list includes both. So, two rules for 'resting_blood_pressure' >=140: one for each class.\n\nFor 'cholesterol', >=240 maps to HP:0003124 (Hypercholesterolemia).\n\nFor 'max_heart_rate', >100 maps to HP:0001649 (Tachycardia).\n\nFor 'st_depression', >=1 maps to HP:0012250 (ST segment depression).\n\nFor 'num_major_vessels', >=1 maps to HP:0005145 (Coronary artery stenosis).\n\nFor 'chest_pain_type', if the type is 'atypical angina' or 'typical angina', map to HP:0001681 (Angina pectoris). If the type is not 'asymptomatic', map to HP:0100749 (Chest pain).\n\nFor 'fasting_blood_sugar', if the value is '>120', map to HP:0025691 (Impaired fasting glucose) with an approximate match.\n\nFor 'resting_ecg', if the value is 'left ventricular hypertrophy', map to HP:0001712 (Left ventricular hypertrophy).\n\nFor 'exercise_induced_angina', if 'yes', map to HP:0001681 (Angina pectoris).\n\nOther columns like 'age', 'sex', 'st_slope', 'thalassemia' have no applicable HPO classes.\n",
+   "meta": {
+    "model": "qwen3:14b",
+    "think": true,
+    "options": {
+     "temperature": 0.6,
+     "top_p": 0.95,
+     "top_k": 20,
+     "seed": 42,
+     "num_ctx": 32768
+    },
+    "done_reason": "stop",
+    "prompt_tokens": 3931,
+    "output_tokens": 6206,
+    "seconds": 163.8
+   }
+  }
+ ],
+ "queries": {
+  "age": [
+   "elderly",
+   "senile",
+   "advanced age",
+   "aging",
+   "age-related"
+  ],
+  "resting_blood_pressure": [
+   "hypertension",
+   "elevated blood pressure",
+   "hypertensive disorder",
+   "high blood pressure",
+   "arterial hypertension"
+  ],
+  "cholesterol": [
+   "hypercholesterolemia",
+   "dyslipidemia",
+   "elevated low-density lipoprotein cholesterol",
+   "hyperlipidemia",
+   "lipid disorder"
+  ],
+  "max_heart_rate": [
+   "tachycardia",
+   "elevated heart rate",
+   "abnormal heart rate",
+   "arrhythmia",
+   "sinus tachycardia"
+  ],
+  "st_depression": [
+   "ST segment depression",
+   "myocardial ischemia",
+   "abnormal ST segment",
+   "exercise-induced ST depression",
+   "ST-T wave abnormality"
+  ],
+  "num_major_vessels": [
+   "coronary artery disease",
+   "multivessel coronary artery disease",
+   "coronary vessel abnormalities",
+   "coronary artery stenosis",
+   "coronary artery occlusion"
+  ],
+  "sex": [
+   "male",
+   "female",
+   "sex-related disorder",
+   "gender-specific condition",
+   "male predominance"
+  ],
+  "chest_pain_type": [
+   "angina pectoris",
+   "chest pain",
+   "non-anginal chest pain",
+   "atypical angina",
+   "typical angina"
+  ],
+  "fasting_blood_sugar": [
+   "hyperglycemia",
+   "diabetes mellitus",
+   "elevated fasting blood glucose",
+   "impaired fasting glucose",
+   "glucose intolerance"
+  ],
+  "resting_ecg": [
+   "abnormal resting electrocardiogram",
+   "left ventricular hypertrophy",
+   "ST-T abnormality",
+   "electrocardiographic abnormality",
+   "ECG abnormality"
+  ],
+  "exercise_induced_angina": [
+   "angina pectoris",
+   "exercise-induced angina",
+   "myocardial ischemia",
+   "angina during exercise",
+   "ischemic heart disease"
+  ],
+  "st_slope": [
+   "abnormal ST segment slope",
+   "ST segment flat",
+   "ST segment upsloping",
+   "ST segment downsloping",
+   "ST-T wave abnormality"
+  ],
+  "thalassemia": [
+   "abnormal myocardial perfusion",
+   "myocardial ischemia",
+   "thallium-201 myocardial perfusion defect",
+   "myocardial perfusion abnormality",
+   "cardiac perfusion defect"
+  ]
+ },
+ "candidates": "`age`:\n  - HP:0031953 | Cautious gait | parents: Gait disturbance\n  - HP:0100256 | Senile plaques | parents: Atrophy/Degeneration affecting the central nervous system\n  - HP:0007819 | Presenile cataracts | parents: Cataract\n  - HP:0031287 | Seborrheic keratosis | parents: Neoplasm of the skin\n  - HP:0007495 | Prematurely aged appearance | parents: Generalized abnormality of skin\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n  - HP:0040006 | Mortality/Aging | parents: Clinical course\n  - HP:0500016 | Abnormal cardiac MRI | parents: Abnormal cardiac test\n  - HP:0033775 | Pulmonary imaging sign | parents: Abnormal pulmonary thoracic imaging finding\n  - HP:0002419 | Molar tooth sign on MRI | parents: Abnormal midbrain morphology\n  - HP:0033822 | Mass on thoracic imaging | parents: Abnormal pulmonary thoracic imaging finding\n  - HP:0410263 | Brain imaging abnormality | parents: Abnormal nervous system physiology\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:0012705 | Abnormal metabolic brain imaging by MRS | parents: Brain imaging abnormality\n  - HP:0011141 | Age-related cataract | parents: Cataract\n  - HP:0011142 | Age-related nuclear cataract | parents: Age-related cataract\n  - HP:0011143 | Age-related cortical cataract | parents: Age-related cataract\n  - HP:0003831 | Typified by age-related disease onset | parents: Inheritance qualifier\n  - HP:0011144 | Age-related posterior subcapsular cataract | parents: Age-related cataract\n  - HP:0031128 | Impaired collagen-related peptide-induced platelet aggregation | parents: Impaired platelet aggregation\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n  - HP:0100603 | Toxemia of pregnancy | parents: Pregnancy history\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0033352 | Pulmonary hypertensive crisis | parents: Elevated pulmonary artery pressure\n  - HP:0002092 | Pulmonary arterial hypertension | parents: Pre-capillary pulmonary hypertension\n  - HP:0033424 | Pulmonary arterial hypertension with lack of acute response to NO challenge | parents: Pulmonary arterial hypertension\n  - HP:0033423 | Pulmonary arterial hypertension with positive acute response to NO challenge | parents: Pulmonary arterial hypertension\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0003141 | Elevated circulating LDL-C concentration | parents: Hyperlipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0003362 | Elevated circulating VLDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0003077 | Hyperlipidemia | parents: Abnormal circulating lipid concentration\n  - HP:0008279 | Transient hyperlipidemia | parents: Hyperlipidemia\n`max_heart_rate`:\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0031860 | Abnormal heart rate variability | parents: Arrhythmia\n  - HP:0002521 | Hypsarrhythmia | parents: EEG with generalized epileptiform discharges\n  - HP:0001692 | Atrial arrhythmia | parents: Supraventricular arrhythmia\n  - HP:0011215 | Hemihypsarrhythmia | parents: EEG with focal epileptiform discharges\n  - HP:0004308 | Ventricular arrhythmia | parents: Arrhythmia\n  - HP:0005115 | Supraventricular arrhythmia | parents: Arrhythmia\n  - HP:0004755 | Supraventricular tachycardia | parents: Tachycardia, Supraventricular arrhythmia\n  - HP:0040182 | Inappropriate sinus tachycardia | parents: Sinus tachycardia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n  - HP:0012249 | Abnormal ST segment | parents: Abnormal EKG\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:0004329 | Abnormal posterior eye segment morphology | parents: Abnormal eye morphology\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n`sex`:\n  - HP:0000771 | Gynecomastia | parents: Abnormal breast morphology\n  - HP:0040308 | Male anorgasmia | parents: Male sexual dysfunction, Anorgasmia\n  - HP:0003251 | Male infertility | parents: Infertility, Decreased fertility in males\n  - HP:0000026 | Male hypogonadism | parents: Functional abnormality of male internal genitalia, Hypogonadism\n  - HP:0030015 | Female anorgasmia | parents: Female sexual dysfunction, Anorgasmia\n  - HP:0008222 | Female infertility | parents: Infertility, Decreased fertility in females\n  - HP:0000134 | Female hypogonadism | parents: Hypogonadism, Abnormal ovarian physiology\n  - HP:0031607 | Pelvic organ prolapse | parents: Abnormal vagina morphology\n  - HP:0000149 | Ovarian gonadoblastoma | parents: Gonadoblastoma, Ovarian neoplasm\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0033338 | Abnormal female meiosis | parents: Abnormal meiosis\n`chest_pain_type`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0008255 | Transient neonatal diabetes mellitus | parents: Neonatal insulin-dependent diabetes mellitus\n  - HP:0000857 | Neonatal insulin-dependent diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000877 | Insulin-resistant diabetes mellitus at puberty | parents: Insulin-resistant diabetes mellitus\n  - HP:0025691 | Impaired fasting glucose | parents: Hyperglycemia\n  - HP:0001952 | Glucose intolerance | parents: Abnormal glucose homeostasis\n`resting_ecg`:\n  - HP:0001712 | Left ventricular hypertrophy | parents: Abnormal left ventricle morphology, Ventricular hypertrophy\n  - HP:0000138 | Ovarian cyst | parents: Abnormal ovarian morphology\n  - HP:0034439 | Instep location | parents: Localized\n  - HP:0002088 | Abnormal lung morphology | parents: Abnormal respiratory system morphology\n  - HP:0003019 | Abnormality of the wrist | parents: Abnormality of upper limb joint\n  - HP:0000769 | Abnormality of the breast | parents: Phenotypic abnormality\n  - HP:0000035 | Abnormal testis morphology | parents: Abnormal male external genitalia morphology\n  - HP:0000765 | Abnormal thorax morphology | parents: Abnormal axial skeleton morphology\n  - HP:0000264 | Abnormal mastoid morphology | parents: Abnormal skull morphology\n`exercise_induced_angina`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`st_slope`:\n  (no candidate found)\n`thalassemia`:\n  (no candidate found)",
+ "prompt": "We have a tabular dataset of patients referred for coronary angiography (Cleveland heart disease dataset).\nColumns:\n- `age` (numeric, observed range 29-77, median 56): Age of the patient (years).\n- `resting_blood_pressure` (numeric, observed range 94-200, median 130): Resting systolic blood pressure on admission to the hospital (mmHg).\n- `cholesterol` (numeric, observed range 126-564, median 242.5): Serum total cholesterol (mg/dl).\n- `max_heart_rate` (numeric, observed range 71-202, median 152.5): Maximum heart rate achieved during an exercise stress test (beats per minute).\n- `st_depression` (numeric, observed range 0-6.2, median 0.8): ST depression induced by exercise relative to rest (mm).\n- `num_major_vessels` (numeric, observed range 0-3, median 0): Number of major coronary vessels (0-3) colored by fluoroscopy during angiography.\n- `sex` (categorical, values: 'female', 'male'): Sex of the patient.\n- `chest_pain_type` (categorical, values: 'asymptomatic', 'atypical angina', 'non-anginal pain', 'typical angina'): Type of chest pain reported by the patient.\n- `fasting_blood_sugar` (categorical, values: '<=120 mg/dl', '>120 mg/dl'): Fasting blood sugar, dichotomised at 120 mg/dl.\n- `resting_ecg` (categorical, values: 'ST-T abnormality', 'left ventricular hypertrophy', 'normal'): Resting electrocardiographic result.\n- `exercise_induced_angina` (categorical, values: 'no', 'yes'): Angina induced by the exercise stress test.\n- `st_slope` (categorical, values: 'downsloping', 'flat', 'upsloping'): Slope of the peak exercise ST segment.\n- `thalassemia` (categorical, values: 'fixed defect', 'normal', 'reversible defect'): Result of the thallium-201 myocardial perfusion scintigraphy stress test (the column name is historical; it is NOT the blood disorder thalassemia).\n\nTask: align the columns of this dataset with classes of the Human Phenotype Ontology (HPO).\nFor each column, write rules that map values (or value ranges) to the HPO class describing the\nabnormality those values indicate. Each HPO class will become an additional binary column\n(1 if the rule is true for the patient, 0 otherwise) used to train a machine-learning model.\n\nConstraints:\n- HPO describes abnormalities: normal values get no class. Columns that are not phenotypes may get no rule.\n- Choose thresholds from established clinical knowledge, not from this specific dataset.\n- Each `rule` must be a valid pandas `DataFrame.eval` boolean expression using only the column names\n  above and, for categorical columns, the exact values listed (e.g. `col == 'value'`, `col >= 140`,\n  `col in ['a', 'b']`). A rule may combine several columns.\n- Several rules may point to the same HPO class, and one column may yield several classes.\n- `hp_id` must be a real HPO identifier (format HP:0000000) and `hp_label` its exact label.\n- `match_type`: \"exact\" if the class describes the finding exactly, \"broader\" if you had to use a\n  more general class, \"approximate\" if it is a clinical interpretation.\n\nUse ONLY HPO classes from the following candidate list (retrieved from the HPO release we use).\nIf no candidate fits a column, give that column no rule.\n`age`:\n  - HP:0031953 | Cautious gait | parents: Gait disturbance\n  - HP:0100256 | Senile plaques | parents: Atrophy/Degeneration affecting the central nervous system\n  - HP:0007819 | Presenile cataracts | parents: Cataract\n  - HP:0031287 | Seborrheic keratosis | parents: Neoplasm of the skin\n  - HP:0007495 | Prematurely aged appearance | parents: Generalized abnormality of skin\n  - HP:0005616 | Accelerated skeletal maturation | parents: Abnormality of skeletal maturation\n  - HP:0004233 | Advanced ossification of carpal bones | parents: Abnormality of carpal bone ossification\n  - HP:0040006 | Mortality/Aging | parents: Clinical course\n  - HP:0500016 | Abnormal cardiac MRI | parents: Abnormal cardiac test\n  - HP:0033775 | Pulmonary imaging sign | parents: Abnormal pulmonary thoracic imaging finding\n  - HP:0002419 | Molar tooth sign on MRI | parents: Abnormal midbrain morphology\n  - HP:0033822 | Mass on thoracic imaging | parents: Abnormal pulmonary thoracic imaging finding\n  - HP:0410263 | Brain imaging abnormality | parents: Abnormal nervous system physiology\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:0012705 | Abnormal metabolic brain imaging by MRS | parents: Brain imaging abnormality\n  - HP:0011141 | Age-related cataract | parents: Cataract\n  - HP:0011142 | Age-related nuclear cataract | parents: Age-related cataract\n  - HP:0011143 | Age-related cortical cataract | parents: Age-related cataract\n  - HP:0003831 | Typified by age-related disease onset | parents: Inheritance qualifier\n  - HP:0011144 | Age-related posterior subcapsular cataract | parents: Age-related cataract\n  - HP:0031128 | Impaired collagen-related peptide-induced platelet aggregation | parents: Impaired platelet aggregation\n`resting_blood_pressure`:\n  - HP:0000822 | Hypertension | parents: Increased blood pressure\n  - HP:0001409 | Portal hypertension | parents: Abnormality of the hepatic vasculature, Increased blood pressure\n  - HP:0007906 | Ocular hypertension | parents: Asymmetry of intraocular pressure\n  - HP:6000321 | Labile Hypertension | parents: Hypertension\n  - HP:0000875 | Episodic hypertension | parents: Hypertension\n  - HP:0008071 | Maternal hypertension | parents: Toxemia of pregnancy\n  - HP:0100817 | Renovascular hypertension | parents: Hypertension, Abnormal renal physiology\n  - HP:0030950 | Pulmonary venous hypertension | parents: Abnormality of pulmonary circulation\n  - HP:0004421 | Elevated systolic blood pressure | parents: Increased blood pressure\n  - HP:0005117 | Elevated diastolic blood pressure | parents: Increased blood pressure\n  - HP:0100603 | Toxemia of pregnancy | parents: Pregnancy history\n  - HP:0020141 | Blood pressure substantially higher in legs than arms | parents: Abnormal systemic blood pressure\n  - HP:0020142 | Blood pressure substantially higher in arms than legs | parents: Abnormal systemic blood pressure\n  - HP:0033352 | Pulmonary hypertensive crisis | parents: Elevated pulmonary artery pressure\n  - HP:0002092 | Pulmonary arterial hypertension | parents: Pre-capillary pulmonary hypertension\n  - HP:0033424 | Pulmonary arterial hypertension with lack of acute response to NO challenge | parents: Pulmonary arterial hypertension\n  - HP:0033423 | Pulmonary arterial hypertension with positive acute response to NO challenge | parents: Pulmonary arterial hypertension\n`cholesterol`:\n  - HP:0003124 | Hypercholesterolemia | parents: Abnormal circulating cholesterol concentration\n  - HP:0003141 | Elevated circulating LDL-C concentration | parents: Hyperlipoproteinemia, Abnormal LDL cholesterol concentration\n  - HP:0003362 | Elevated circulating VLDL-C concentration | parents: Hyperlipoproteinemia, Abnormal circulating VLDL-C concentration\n  - HP:0003077 | Hyperlipidemia | parents: Abnormal circulating lipid concentration\n  - HP:0008279 | Transient hyperlipidemia | parents: Hyperlipidemia\n`max_heart_rate`:\n  - HP:0001649 | Tachycardia | parents: Arrhythmia\n  - HP:0011703 | Sinus tachycardia | parents: Tachycardia, Abnormal electrophysiology of sinoatrial node origin\n  - HP:6000264 | Fetal tachycardia | parents: Tachycardia, Abnormal fetal cardiovascular physiology\n  - HP:0011687 | AV nodal tachycardia | parents: Supraventricular tachycardia\n  - HP:0006688 | Paroxysmal tachycardia | parents: Tachycardia\n  - HP:0004756 | Ventricular tachycardia | parents: Tachycardia\n  - HP:0012173 | Orthostatic tachycardia | parents: Abnormal autonomic nervous system physiology\n  - HP:0011699 | Atrial reentry tachycardia | parents: Atrial arrhythmia\n  - HP:0011675 | Arrhythmia | parents: Abnormality of cardiovascular system electrophysiology\n  - HP:0031860 | Abnormal heart rate variability | parents: Arrhythmia\n  - HP:0002521 | Hypsarrhythmia | parents: EEG with generalized epileptiform discharges\n  - HP:0001692 | Atrial arrhythmia | parents: Supraventricular arrhythmia\n  - HP:0011215 | Hemihypsarrhythmia | parents: EEG with focal epileptiform discharges\n  - HP:0004308 | Ventricular arrhythmia | parents: Arrhythmia\n  - HP:0005115 | Supraventricular arrhythmia | parents: Arrhythmia\n  - HP:0004755 | Supraventricular tachycardia | parents: Tachycardia, Supraventricular arrhythmia\n  - HP:0040182 | Inappropriate sinus tachycardia | parents: Sinus tachycardia\n`st_depression`:\n  - HP:0012250 | ST segment depression | parents: Abnormal ST segment\n  - HP:0012249 | Abnormal ST segment | parents: Abnormal EKG\n  - HP:0030601 | Abnormal posterior segment imaging | parents: Abnormal posterior eye segment morphology\n  - HP:0004329 | Abnormal posterior eye segment morphology | parents: Abnormal eye morphology\n`num_major_vessels`:\n  - HP:0005181 | Premature coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0012436 | Nonocclusive coronary artery atherosclerosis | parents: Coronary artery atherosclerosis\n  - HP:0005145 | Coronary artery stenosis | parents: Abnormal coronary artery morphology\n  - HP:0004761 | Post-angioplasty coronary artery restenosis | parents: Coronary artery atherosclerosis\n`sex`:\n  - HP:0000771 | Gynecomastia | parents: Abnormal breast morphology\n  - HP:0040308 | Male anorgasmia | parents: Male sexual dysfunction, Anorgasmia\n  - HP:0003251 | Male infertility | parents: Infertility, Decreased fertility in males\n  - HP:0000026 | Male hypogonadism | parents: Functional abnormality of male internal genitalia, Hypogonadism\n  - HP:0030015 | Female anorgasmia | parents: Female sexual dysfunction, Anorgasmia\n  - HP:0008222 | Female infertility | parents: Infertility, Decreased fertility in females\n  - HP:0000134 | Female hypogonadism | parents: Hypogonadism, Abnormal ovarian physiology\n  - HP:0031607 | Pelvic organ prolapse | parents: Abnormal vagina morphology\n  - HP:0000149 | Ovarian gonadoblastoma | parents: Gonadoblastoma, Ovarian neoplasm\n  - HP:0030018 | Decreased female libido | parents: Female sexual dysfunction, Decreased libido\n  - HP:0030019 | Increased female libido | parents: Female sexual dysfunction, Increased libido\n  - HP:0033338 | Abnormal female meiosis | parents: Abnormal meiosis\n`chest_pain_type`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n  - HP:0100749 | Chest pain | parents: Pain\n  - HP:0033771 | Pleuritic chest pain | parents: Chest pain\n  - HP:6000048 | Chest pain described as pressure | parents: Pain characteristic\n  - HP:6000047 | Chest pain triggered by palpation | parents: Triggered by\n  - HP:6000049 | Chest pain described as ripping or tearing | parents: Pain characteristic\n`fasting_blood_sugar`:\n  - HP:0003074 | Hyperglycemia | parents: Abnormal blood glucose concentration\n  - HP:0011998 | Postprandial hyperglycemia | parents: Hyperglycemia\n  - HP:0000819 | Diabetes mellitus | parents: Abnormality of the endocrine system, Glucose intolerance\n  - HP:0100651 | Type I diabetes mellitus | parents: Diabetes mellitus\n  - HP:0005978 | Type II diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000831 | Insulin-resistant diabetes mellitus | parents: Diabetes mellitus, Insulin resistance\n  - HP:0008255 | Transient neonatal diabetes mellitus | parents: Neonatal insulin-dependent diabetes mellitus\n  - HP:0000857 | Neonatal insulin-dependent diabetes mellitus | parents: Diabetes mellitus\n  - HP:0000877 | Insulin-resistant diabetes mellitus at puberty | parents: Insulin-resistant diabetes mellitus\n  - HP:0025691 | Impaired fasting glucose | parents: Hyperglycemia\n  - HP:0001952 | Glucose intolerance | parents: Abnormal glucose homeostasis\n`resting_ecg`:\n  - HP:0001712 | Left ventricular hypertrophy | parents: Abnormal left ventricle morphology, Ventricular hypertrophy\n  - HP:0000138 | Ovarian cyst | parents: Abnormal ovarian morphology\n  - HP:0034439 | Instep location | parents: Localized\n  - HP:0002088 | Abnormal lung morphology | parents: Abnormal respiratory system morphology\n  - HP:0003019 | Abnormality of the wrist | parents: Abnormality of upper limb joint\n  - HP:0000769 | Abnormality of the breast | parents: Phenotypic abnormality\n  - HP:0000035 | Abnormal testis morphology | parents: Abnormal male external genitalia morphology\n  - HP:0000765 | Abnormal thorax morphology | parents: Abnormal axial skeleton morphology\n  - HP:0000264 | Abnormal mastoid morphology | parents: Abnormal skull morphology\n`exercise_induced_angina`:\n  - HP:0001681 | Angina pectoris | parents: Abnormal cardiovascular system physiology\n`st_slope`:\n  (no candidate found)\n`thalassemia`:\n  (no candidate found)\n",
+ "rules": [
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0004421",
+   "hp_label": "Elevated systolic blood pressure",
+   "match_type": "exact",
+   "justification": "Systolic blood pressure ≥140 mmHg is the clinical threshold for elevated systolic blood pressure (HPO class HP:0004421)."
+  },
+  {
+   "variable": "resting_blood_pressure",
+   "rule": "resting_blood_pressure >= 140",
+   "hp_id": "HP:0000822",
+   "hp_label": "Hypertension",
+   "match_type": "broader",
+   "justification": "Systolic blood pressure ≥140 mmHg is a manifestation of hypertension (HPO class HP:0000822), which is a broader category."
+  },
+  {
+   "variable": "cholesterol",
+   "rule": "cholesterol >= 240",
+   "hp_id": "HP:0003124",
+   "hp_label": "Hypercholesterolemia",
+   "match_type": "exact",
+   "justification": "Total cholesterol ≥240 mg/dl is the clinical threshold for hypercholesterolemia (HPO class HP:0003124)."
+  },
+  {
+   "variable": "max_heart_rate",
+   "rule": "max_heart_rate > 100",
+   "hp_id": "HP:0001649",
+   "hp_label": "Tachycardia",
+   "match_type": "exact",
+   "justification": "Heart rate >100 bpm is the clinical threshold for tachycardia (HPO class HP:0001649)."
+  },
+  {
+   "variable": "st_depression",
+   "rule": "st_depression >= 1",
+   "hp_id": "HP:0012250",
+   "hp_label": "ST segment depression",
+   "match_type": "exact",
+   "justification": "ST depression ≥1 mm is the clinical threshold for ST segment depression (HPO class HP:0012250)."
+  },
+  {
+   "variable": "num_major_vessels",
+   "rule": "num_major_vessels >= 1",
+   "hp_id": "HP:0005145",
+   "hp_label": "Coronary artery stenosis",
+   "match_type": "approximate",
+   "justification": "Presence of any major coronary vessel stenosis (≥1 vessel) is associated with coronary artery stenosis (HPO class HP:0005145). This is an approximate mapping as vessel count alone does not fully define stenosis severity."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type in ['atypical angina', 'typical angina']",
+   "hp_id": "HP:0001681",
+   "hp_label": "Angina pectoris",
+   "match_type": "exact",
+   "justification": "Typical and atypical angina are recognized manifestations of angina pectoris (HPO class HP:0001681)."
+  },
+  {
+   "variable": "chest_pain_type",
+   "rule": "chest_pain_type != 'asymptomatic'",
+   "hp_id": "HP:0100749",
+   "hp_label": "Chest pain",
+   "match_type": "broader",
+   "justification": "Any chest pain type other than asymptomatic indicates presence of chest pain (HPO class HP:0100749), a broader category."
+  },
+  {
+   "variable": "fasting_blood_sugar",
+   "rule": "fasting_blood_sugar == '>120 mg/dl'",
+   "hp_id": "HP:0025691",
+   "hp_label": "Impaired fasting glucose",
+   "match_type": "approximate",
+   "justification": "Fasting blood sugar >120 mg/dl is interpreted as impaired fasting glucose (HPO class HP:0025691), an approximate mapping as the exact threshold for impaired glucose is 100-125 mg/dl."
+  },
+  {
+   "variable": "resting_ecg",
+   "rule": "resting_ecg == 'left ventricular hypertrophy'",
+   "hp_id": "HP:0001712",
+   "hp_label": "Left ventricular hypertrophy",
+   "match_type": "exact",
+   "justification": "Resting ECG finding of left ventricular hypertrophy directly maps to HPO class HP:0001712."
+  },
+  {
+   "variable": "exercise_induced_angina",
+   "rule": "exercise_induced_angina == 'yes'",
+   "hp_id": "HP:0001681",
+   "hp_label": "Angina pectoris",
+   "match_type": "exact",
+   "justification": "Exercise-induced angina is a recognized manifestation of angina pectoris (HPO class HP:0001681)."
+  }
+ ]
+}

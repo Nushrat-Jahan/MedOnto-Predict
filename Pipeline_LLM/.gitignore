@@ -1,0 +1,7 @@
+# Ontologie HPO : trop volumineuse pour le dépôt, à télécharger localement
+hp.owl
+
+# Artefacts d'exécution
+__pycache__/
+*.py[cod]
+catboost_info/
