@@ -1,5 +1,8 @@
 # Pipeline_LLM
 
+> **Documentation complète** : [`README_pipeline_LLM.pdf`](README_pipeline_LLM.pdf) — contexte,
+> protocole d'évaluation, résultats détaillés (SHAP, écarts à la baseline), limites et glossaire.
+
 Alignement de variables cliniques vers l'ontologie **HPO** à l'aide de LLM locaux
 (servis par [Ollama](https://ollama.com)), puis construction de variables
 ontologiques pour la prédiction. Cas d'usage : jeu de données *heart disease* (UCI).
@@ -11,7 +14,8 @@ ontologiques pour la prédiction. Cas d'usage : jeu de données *heart disease* 
 | `llm_mapping.py` | Alignement colonnes → classes HPO par LLM, en deux conditions : `zero-shot` (le modèle répond de mémoire) et `grounded` (le modèle choisit parmi des candidats réellement extraits de `hp.owl`). Réponses mises en cache dans `llm_mappings/`. |
 | `threshold_llm.py` | Règles cliniques (seuils numériques, modalités catégorielles) proposées par le LLM, puis seuil choisi par le LLM parmi des candidats évalués sur les patients d'entraînement de chaque fold (critère AUC ou Gini). Cache dans `llm_thresholds/`. |
 | `heart_ontology_2.ipynb` | Notebook d'expérimentation et d'évaluation. |
-| `heart.csv` | Jeu de données *heart disease* (UCI). |
+| `heart.csv` | Jeu de données *heart disease* (Cleveland, 303 patients, 13 variables + `target`). |
+| `README_pipeline_LLM.pdf` | Documentation détaillée du notebook, section par section. |
 | `llm_mappings/` | Alignements mis en cache, par modèle et par condition. |
 | `llm_thresholds/` | Règles et seuils mis en cache, par modèle, critère et fold. |
 
